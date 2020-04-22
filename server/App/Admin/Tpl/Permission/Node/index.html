@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+
+<meta http-equiv="Cache-Control" content="max-age=7200" />
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<load href="__PUBLIC__/Admin/Js/Base.js" />
+<load href="__PUBLIC__/Admin/Js/prototype.js" />
+<load href="__PUBLIC__/Admin/Js/mootools.js" />
+<load href="__PUBLIC__/Admin/Js/Form/CheckForm.js" />
+<load href="__PUBLIC__/Admin/Js/Think/ThinkAjax.js" />
+<load href="__PUBLIC__/Admin/Js/common.js" />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+function edit(x){
+	window.location = "__URL__/edit/{$x}/" + x;
+}
+function del(x){
+	window.location =  "__URL__/delD/{$x}/" + x;
+}
+</script>
+<body>
+<div id="doc"> 
+  <!--head开始--> 
+  
+  <!--head结束-->
+  <div class="bd clearfix"> 
+    <!--左侧开始--> 
+    
+    <!--左侧结束-->
+    <div id="mainContainer">
+      <div class="mod mod1">
+        <ul class="tab_title">
+          <li class="on"><a href="__URL__/index">节点列表</a></li>
+          <li ><a href="__URL__/add">添加节点</a></li>
+          <li ><a href="__URL__/addmuch">批量添加节点</a></li>
+        </ul>
+        <div class="mod-header radius clearfix">
+          <h2>节点列表</h2>
+        </div>
+        <div class="mod-body">
+          <div class="content">
+            <html:imageBtn name="delete" value="删除" click="foreverdel()" style="impBtn hMargin fLeft shadow" />
+            <!-- 列表显示区域  -->
+            <tagLib name="html" />
+            <div class="" >
+              <div id="result" class="result none"></div>
+              <html:list id="checkList" name="node" style="list" checkbox="true" action="true" datasource="list" show="0:编号|10%,1:名称|20%:child,3|ab_is_ab:说明,4|getStatus:状态" actionlist="edit:编辑:0,del:删除:0" />
+            </div>
+            <!--  分页显示区域 -->
+            <div class="page">{$page}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hiddenft"></div>
+</div>
+</body>
+</html>

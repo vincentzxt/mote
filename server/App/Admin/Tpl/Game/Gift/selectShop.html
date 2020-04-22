@@ -1,0 +1,164 @@
+<load href='__PUBLIC__/css/layout.css' />
+<load href="__PUBLIC__/Admin/Js/Base.js" />
+<load href="__PUBLIC__/Admin/Js/prototype.js" />
+<load href="__PUBLIC__/Admin/Js/mootools.js" />
+<load href="__PUBLIC__/Admin/Js/Form/CheckForm.js" />
+<load href="__PUBLIC__/Admin/Js/Think/ThinkAjax.js" />
+<load href="__PUBLIC__/Admin/Js/common.js" />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<tagLib name="html" />
+<script type="text/javascript">
+var URL='__URL__';
+var api = frameElement.api, W = api.opener,
+    cDG;
+
+function add(){
+	window.location = "__URL__/add";
+}
+function edit(x){
+	window.location = "__URL__/edit/{$x}=" + x;
+}
+function del(x){
+	window.location =  "__URL__/delD/{$x}/" + x;
+}
+function down(x){
+	window.location =  "__URL__/downfile?file=" + x;
+}
+function command(x,y){
+	//alert(x);
+	//command2sy  
+	//$id = int(trim($_REQUEST['id']));
+	//$val = int(trim($_REQUEST['command']));
+	$.ajax({
+	   type: "POST",
+	   url: "command2sy",
+	   data: "id="+x+"&command="+y,
+	   success: function(msg){
+		// alert( "Data Saved: " + msg );
+		   if(msg==1){
+			   alert('操作成功');
+				 window.location.reload();   
+		   }else{
+			   alert('操作失败');   
+		   }
+	   }
+	});
+	
+	
+	
+	
+}
+
+//批量插入
+function selectAllinsert(){	
+	//alert(W.idsarray);
+	$("input[name=key]:checked").each(function(){ //由于复选框一般选中的是多个,所以可以循环输出选中的值    
+  	    //alert($(this).next('input').val());  
+		$(this).attr("checked", true);  
+		selectShop($(this).val())
+	});    
+}
+
+function selectShop(i){
+	//alert(i);
+	$("input[name=key][value="+ i +"]").attr("checked", true); 
+	
+	$("input[name=key][value="+ i +"]").parent().parent('tr').find('td:last').html('<a href="javascript:;" onclick="deleteShop('+ i +');">删除</a>')
+	var a = $("input[name=key][value="+ i +"]").parent().parent('tr').find('input[name="item_id"]').val();
+	var b = $("input[name=key][value="+ i +"]").parent().parent('tr').find('input[name="item_name"]').val();	
+	
+	W.getAll_shopid();
+	var t = $.inArray(a,W.idsarray);
+	if(t==-1){
+		W.addShop(a,b,i);
+	}
+	
+
+	/*
+	W.document.getElementById('id').value = a;
+	W.document.getElementById('yundanhao').value = a;
+	W.document.getElementById('riqi').value = b;
+	W.document.getElementById('fazhan').value = c;
+	W.document.getElementById('daozhan').value = d;
+	W.document.getElementById('fa_gongsimingcheng').value = e;
+	W.document.getElementById('fa_shouji').value = f;
+	W.document.getElementById('shou_gongsimingcheng').value = g;
+	W.document.getElementById('shou_shouji').value = h;
+	W.document.getElementById('chengyunhejishu').value = j;
+	W.document.getElementById('hz_ydfuwu').value = k;
+	*/
+    
+}
+
+//删除一条
+function deleteShop(i){
+	jQuery("input[name=key][value="+ i +"]").attr("checked",false);
+	$("input[name=key][value="+ i +"]").parent().parent('tr').find('td:last').html('<a href="javascript:selectShop('+ i +')">选择</a>')
+    W.delShop(i);
+}
+
+//批量删除
+function deleteAllShop(){
+	
+	$("input[name=key]:checked").each(function(){ //由于复选框一般选中的是多个,所以可以循环输出选中的值    
+  	   //alert(jQuery(this).val());    
+	    jQuery(this).attr("checked", false);    
+	  //  alert('idsarray:'+W.idsarray);
+		deleteShop(jQuery(this).val());
+	});    
+}
+</script>
+
+<div class="main">
+  <div class="content" >
+  
+    <!--  功能操作区域  -->
+    <div class="operate" >
+     
+      <!-- 查询区域 -->
+      
+      <div class="fRig">
+        <form method='post' action="">
+        道具分类：
+        <select name="type" id="type">
+        	<option value="" class="0">根目录</option>
+        	<volist name="sct" id="data">
+          		<option value="{$data[0]}" class="{$data[5]}"
+                	
+                >{$data[3]}</option>
+        	</volist>
+      	</select>
+          道具ID：
+          <input type="text" name="m_item_id" style="width:80px;" class="medium" value="{$req.m_item_id}" ><br/>
+          道具名称：
+          <input type="text" name="m_item_name"  style="width:100px;" class="medium" value="{$req.m_item_name}" >
+          状态有效性：
+          <select name="status" id="status">
+              <option value="" class="0">请选择</option>
+      		  <option value="1" class="0">启用</option>
+              <option value="0" class="0">禁用</option>
+          </select>
+          
+          <input type="submit" name="sub" value="查询" /><br/>
+          
+          <!-- 高级查询区域 -->
+          <div  id="searchM" class=" none search cBoth" > </div>
+        </form>
+      </div>
+      <!-- 功能操作区域结束 --> 
+      <!-- 列表显示区域  -->
+      <div id="ThinkAjaxResult" style="display:none;"></div>
+      <br/>
+       <html:imageBtn name="add" value="插入选中项" click="selectAllinsert();" style="impBtn hMargin fLeft shadow" />
+  <html:imageBtn name="add" value="删除选中项" click="deleteAllShop()" style="impBtn hMargin fLeft shadow" />
+      <div class="list" >
+        <html:list id="checkList" name="list" style="list" checkbox="true" action="true" datasource="list" pk="id" show="id:编号,type|toShopCategory:商品道具分类,item_id|chg_role_input='item_id':道具ID,item_name|chg_role_input='item_name':道具名称" actionlist="selectShop:选择:id" />
+      </div>
+      <!--  分页显示区域 -->
+      <div class="page">{$page}</div>
+      <!-- 列表显示区域结束 --> 
+    </div>
+    <!-- 主体内容结束 --> 
+  </div>
+  <!-- 主页面结束 --> 
+</div>

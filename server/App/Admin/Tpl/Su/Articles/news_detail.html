@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+
+<meta name="csrf-param" content="authenticity_token">
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script language="javascript">
+function add(){
+    window.location = "__URL__/add";	
+}
+function edit(x){
+	window.location = "__URL__/edit/{$x}/" + x;
+}
+function del(x){
+	window.location =  "__URL__/delD/{$x}/" + x;
+}
+</script>
+<style>
+<!--
+.floatL {
+	float: left
+}
+-->
+</style>
+</head>
+<body>
+<div id="doc"> 
+  <!--head开始--> 
+  
+  <!--head结束-->
+  <div class="bd clearfix"> 
+    <!--左侧开始--> 
+    
+    <!--左侧结束-->
+    <div id="mainContainer">
+      <div class="mod mod1">
+        <div class="mod-header radius clearfix">
+          <h2>用户组管理</h2>
+        </div>
+        <div class="mod-body mod-body-ie8">
+          <div class="content" >
+            <div class="fontWhite size22 font_specail"><a href="__URL__/lindex" class="white">返回通知列表</a></div>
+            <h2 style="font-size:18px; color:#06F; line-height:45px; height:45px;">查看通知</h2>
+            
+            <!-- 列表显示区域  -->
+            <table border="0" cellspacing="0" cellpadding="0" >
+              <tr>
+                <td><h1 class="news_tit" style="font-size:18px; margin-bottom:15px; color: #333;">{$vo.title}</h1></td>
+              </tr>
+              <tr>
+                <td><div class="writer">发布人：{$vo.author}  日期：{$vo.time|toDate}</div></td>
+              </tr>
+              <tr>
+                <td><div class="floatR news_img">
+                    <if condition="$vo.Imageurl neq ''"><img src="__ROOT__/{$vo['Imageurl']}" width="600" height="400" /></if>
+                  </div></td>
+              </tr>
+              <tr>
+                <td><div class="paddingT20 paddingB20"> {$vo.Body|noHTML} </div></td>
+              </tr>
+              <tr>
+                <td><br><div class="xx_left_bot"><span>上一条：</span>
+                    <empty  name="vo_s"> 暂无
+                      <else />
+                      <a href="__URL__/detail/id/{$vo_s.id}" title="">{$vo_s.title}</a> </empty>
+                  </div></td>
+              </tr>
+              <tr>
+                <td><div class="xx_left_bot"><span>下一条：</span>
+                    <empty  name="vo_x"> 暂无
+                      <else />
+                      <a href="__URL__/detail/id/{$vo_x.id}" title="">{$vo_x.title}</a> </empty>
+                  </div></td>
+              </tr>
+            </table>
+            
+            <!--  分页显示区域 --> 
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hiddenft"></div>
+</div>
+</body>
+</html>

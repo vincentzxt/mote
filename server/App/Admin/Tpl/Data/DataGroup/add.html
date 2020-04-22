@@ -1,0 +1,67 @@
+<!DOCTYPE>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script language="javascript">
+    //获得选中项的索引   
+	function ab(){
+      var a = $("select option:selected").attr('class');
+	  alert(a);
+	  document.getElementById("level").value = parseInt(a) + 1;
+	}
+</script>
+</head>
+
+<body>
+<div id="doc">
+      <!--head开始-->
+      
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+        
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+            <ul class="tab_title">
+                <li><a href="__APP__/Data/DataAuthority">数据栏目管理</a></li>
+            	<li class="on"><a href="__APP__/Data/DataGroup">权限分类管理</a></li>
+            </ul>
+          	<div class="mod-header radius clearfix"><h2>添加权限分类</h2></div>
+            <div class="mod-body">
+            	<div class="content register_content_center">
+                    <form method='post' action="__URL__/Insert">
+                    	<table cellpadding=3 cellspacing=3>
+                        	<tr>
+                            	<td class="tRight">分类名称：</td>
+                                <td class="tLeft"><input type="text" name="title" value="" /></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight">分类说明：</td>
+                                <td class="tLeft"><input type="text" name="beizhu" value="" /></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight"></td>
+                                <td class="tLeft"><input type="submit" value="提交" class="imgButton" /></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight"></td>
+                                <td class="tLeft"><a href="../DataGroup">返回列表</a></td>
+                            </tr>
+                        </table>
+                    </form>
+                    
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+     
+    </div>
+
+
+</body>
+</html>

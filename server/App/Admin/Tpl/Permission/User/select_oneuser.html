@@ -1,0 +1,308 @@
+<!DOCTYPE>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery双向选择器代码 - 站长素材</title>
+
+<style type="text/css">
+.s1{width:120px;}
+#d1{width:510px;height: auto;background-color:#F5DEB3;margin:0 auto;}
+#d2{height:30px;font-size:24px;background-color:blue;color:white;}
+#d3{padding-left:30px;}
+</style>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/lab2.js"></script>
+
+  <script language="javascript">
+  //框架信息
+  var api = frameElement.api, W = api.opener;
+
+/* 函数ok即为上面添加按钮方法中callback回调函数调用的函数 */
+function okd()
+{
+	var fid = '{$valname}';
+	W.document.getElementById(fid).value = '';
+	//获取用户的值
+	W.document.getElementById(fid+'_name').value = '';
+	api.close();
+};
+function okc(i)
+{
+	/*var b = "yue" + i;
+	var a = "kh" + i;
+    var a1 = "khname"  + i;
+	var a2 = "kehudaima"  + i;
+	var a3 = "gongsidizhi"  + i;
+
+    W.document.getElementById('fa_gongsimingcheng').value = document.getElementById(a1).value;
+	W.document.getElementById('fa_lianxidizhi').value = document.getElementById(a3).value;
+	W.document.getElementById('fa_kehudaima').value = document.getElementById(a2).value;
+	W.document.getElementById('khid').value = document.getElementById(a).value;
+	W.document.getElementById('jiesuanyue').value = document.getElementById(b).value;*/
+	
+	//$("#sub").click(function(){
+		var fid = '{$valname}';
+		var selVal = [];
+		var selText = [];
+		$('#s2').find("option").each(function(){
+			selVal.push(this.value);
+			selText.push(this.text);
+		});
+		selVals = selVal.join(",");
+		selTexts = selText.join(",");
+		//selVals = rightSel.val();
+		if(selVals==""){
+			alert("没有选择任何项！");
+		}else{
+			//alert(selVals);
+			//alert(selTexts);
+		}
+	//});
+	//获取用户的id
+	W.document.getElementById(fid).value = selVals;
+	//获取用户的值
+	W.document.getElementById(fid+'_name').value = selTexts;
+	api.close();
+};
+  
+  //选择部门
+  function select_bumen(){
+	  var id = $('#fgs_id').val();
+	  if(id==0)
+	  {
+		alert('请先选择公司');  
+	  }else{
+		 var flag = $('#bumenflag').val();
+		
+		
+		 if(flag==0){
+			  $.ajax({
+			   type: "POST",
+			   url: "__URL__/select_bumen",
+			   data: "company="+id,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#bm_id').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#bumenflag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+	
+  }
+  //选择组
+  function select_group(){
+	  var cid = $('#fgs_id').val();
+	  var bmid =  $('#bm_id').val();
+
+	  if(cid==0&&bmid==0)
+	  {
+		alert('请先选择分公司或者部门');  
+	  }else{
+		 var flag = $('#groupflag').val();
+		
+		
+		 if(flag==0){
+			  $.ajax({
+			   type: "POST",
+			   url: "__URL__/select_group",
+			   data: "bumen="+bmid,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#group_id').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#groupflag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+  }
+   //选择角色
+  function select_role(){
+	  var cid = $('#fgs_id').val();
+	  var bmid =  $('#bm_id').val();
+	  var groupid =  $('#group_id').val();
+
+	  if(cid==0||bmid==0||groupid==0)
+	  {
+		alert('请先选择分公司/部门/组');  
+	  }else{
+		 var flag = $('#roleflag').val();
+		
+		
+		 if(flag==0){
+			  $.ajax({
+			   type: "POST",
+			   url: "__URL__/select_role",
+			   data: "group="+groupid,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#role_id').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#roleflag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+  }
+  
+  
+  function setfalg(){
+	   $('#bumenflag').val(0);
+	   $('#groupflag').val(0);
+	   $('#roleflag').val(0);
+	   $('#bm_id').find("option").remove(); 
+	   $('#bm_id').append("<option value='0'>请选择</option>");
+	   $('#group_id').append("<option value='0'>请选择</option>");
+	   $('#role_id').append("<option value='0'>请选择</option>");
+  }
+  function setgroupfalg(){
+	   $('#groupflag').val(0);
+	   $('#roleflag').val(0);
+	   $('#group_id').find("option").remove(); 
+	   $('#group_id').append("<option value='0'>请选择</option>");
+	   $('#role_id').append("<option value='0'>请选择</option>");
+  }
+  function setroleflag(){
+	   $('#roleflag').val(0);
+	   $('#role_id').find("option").remove(); 
+	   $('#role_id').append("<option value='0'>请选择</option>");
+  }
+  
+  function toAjaxSelect(){
+	  //生成map变量
+	   var cid = $('#fgs_id').val();//分公司id
+	   var bmid =  $('#bm_id').val();//部门id
+	   var groupid =  $('#group_id').val(); //组id
+	   var roleid = $('#role_id').val();//角色id
+	   $('#s1').find("option").remove(); 
+	   $.ajax({
+			   type: "POST",
+			   url: "__URL__/ajax_select_user",
+			   data: "cid="+cid+"&bmid="+bmid+"&groupid="+groupid+"&roleid="+roleid,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#s1').append("<option value='"+item.id+"'>"+item.username+"</option>");
+						
+					   }); 
+				   }
+				
+			   }
+		}); 
+  }
+  $(document).ready(function(){
+  // 在这里写你的代码...
+  setfalg();
+});
+  </script>
+</head>
+<body>
+
+<div id="d1">
+	<div id="d2">选择用户</div>
+	<div id="d3">
+		<table cellpadding="0" cellspacing="8">
+			
+            <tr>
+				<td colspan="3">分公司
+				
+				  <SELECT name="fgs_id" id="fgs_id" onChange="setfalg()">
+                        <option value="0" selected>请选择</option>
+                         <volist name="clist" id="vs">
+                          <option value="{$vs.id}">{$vs.name}</option>
+                          </volist>
+                        </SELECT>
+				  部门
+				  <input type="hidden" name="bumenflag" id="bumenflag" value="0" />
+                        <SELECT name="bm_id" id="bm_id" onclick="select_bumen();" onChange="setgroupfalg()">
+                           <option value="0" selected>请选择</option>
+                        </SELECT>
+				  组<input type="hidden" name="groupflag" id="groupflag" value="0" />
+				  <select name="group_id" id="group_id" onclick="select_group();" onChange="setroleflag()">
+                   <option value="0" selected>请选择</option>
+		          </select>
+				  角色<input type="hidden" name="roleflag" id="roleflag" value="0" />
+				  <select name="role_id" id="role_id" onclick="select_role();" >
+                   <option value="0" selected>请选择</option>
+			      </select>
+				  <input type="button" name="button" id="button" value="查询" onClick="toAjaxSelect();" />
+                  
+                  </td>
+			</tr>
+            <tr>
+				<td>用户列表</td>
+				<td>&nbsp;</td>
+				<td>选择用户</td>
+			</tr>
+			<tr>
+				<td>
+					<select id="s1" name="s1" style="width:150px; height:220px;" multiple="multiple">
+                          <volist name="list" id="list">
+						  	<option value="{$list.id}" >{$list.username}</option>
+                          </volist>
+					</select>
+				</td>
+				<td>
+					<p><input id="b1" type="button" class="s1" value="--&gt;" /></p>
+				
+					<p><input type="button" id="b3" class="s1" value="&lt;--" /></p>
+				
+				</td>
+				<td><select id="s2" name="s2" style="width:150px;height:220px;" multiple="multiple"></select></td>
+			</tr>
+             <tr>
+				<td>&nbsp;</td>
+				<td><input type="button" name="button2" id="button2" value="获取用户信息" onClick="okc();" /></td>
+                <td><input type="button" name="button2" id="button2" value="清除选择" onClick="okd();" /></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+</body>
+</html>

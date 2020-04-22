@@ -1,0 +1,56 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<load href='__PUBLIC__/js/jquery-1.8.3.min.js' />
+
+<body>
+  <form method='post' id="form1" action="__URL__/update" >
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <table cellpadding=3 cellspacing=3>
+                    <tr>
+                      <td class="tRight" >商品道具ID：</td>
+                      <td class="tLeft" ><input name="item_id" type="text" id="item_id" value="{$vo.item_id}" /></td>
+                    </tr>
+                     <tr>
+                      <td class="tRight" >商品道具名称：</td>
+                      <td class="tLeft" ><input name="item_name" type="text" id="item_name" value="{$vo.item_name}" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >商品分类：</td>
+                        <td class="tLeft" >
+                             <select name="type" id="sle">
+                                  <option value="0" class="0">根目录</option>
+                                   <volist name="sct" id="data">
+                                    <option value="{$data[0]}" class="{$data[5]}"
+                                      <eq name="data[0]" value="$vo.type">selected="selected"</eq>
+                                    >{$data[3]}</option>
+                                   </volist>
+                                </select>
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >状态：</td>
+                        <td class="tLeft" ><select name="status">
+                          <option value="1" selected="selected">开启</option>
+                          <option value="0">关闭</option>
+                          </select></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >排序：</td>
+                        <td class="tLeft" ><label for="textfield"></label>
+                          <input name="order" type="text" id="order" value="1" /></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="submit" value="保 存" class="imgButton"><input type="reset" class="imgButton" value="清 空" ></td>
+                    </tr>
+                    </table>
+                    </form>
+</table>
+</body>
+</div>
+</div>

@@ -1,0 +1,131 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+  <div class="content" style="height: auto;">
+    <div class="title">编辑数据 [ <a href="__URL__">返回列表</a> ]</div>
+    <div id="result" class="result none"></div>
+    <load href='__PUBLIC__/css/layout.css' />
+    <load href='__PUBLIC__/js/editor/kindeditor.js' />
+    <load href='__PUBLIC__/js/jquery-1.8.3.min.js' />
+    
+    <script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					allowFileManager : true
+				});
+				K('input[name=getHtml]').click(function(e) {
+					alert(editor.html());
+				});
+				K('input[name=isEmpty]').click(function(e) {
+					alert(editor.isEmpty());
+				});
+				K('input[name=getText]').click(function(e) {
+					alert(editor.text());
+				});
+				K('input[name=selectedHtml]').click(function(e) {
+					alert(editor.selectedHtml());
+				});
+				K('input[name=setHtml]').click(function(e) {
+					editor.html('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=setText]').click(function(e) {
+					editor.text('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=insertHtml]').click(function(e) {
+					editor.insertHtml('<strong>插入HTML</strong>');
+				});
+				K('input[name=appendHtml]').click(function(e) {
+					editor.appendHtml('<strong>添加HTML</strong>');
+				});
+				K('input[name=clear]').click(function(e) {
+					editor.html('');
+				});
+			});
+		</script> 
+    <script type="text/javascript">
+    KE.show({
+        id : 'content_1' //TEXTAREA输入框的ID
+   });
+   function checklevel(){
+	    id = $('#sctl').val();
+		$.ajax({
+		   type: "POST",
+		   url: "__APP__/Info/Ajax/ajaxfunc",
+		   data: "d=category&&b=&&l=&&t=1&&mf=pid&&mt=eq&&mv="+id,
+		   success: function(msg){
+			 //alert(msg);
+			 var obj = jQuery.parseJSON(msg);
+			 if(obj!=null){
+			     alert('不是根目录，不能添加文章！');
+				 $("#sctl").get(0).selectedIndex=0;//index为索引值
+				 
+			 }
+		   }
+		});
+   }
+</script>
+    <form method='post' id="form1" name="form1" action="__APP__/Info/Zhuanjia/update"  enctype="multipart/form-data">
+        <table cellpadding=3 cellspacing=3  width="100%" class="list">
+            <input type="hidden" name="id" value="{$vo.id}">
+            <tr>
+                <td class="tRight">专家姓名：</td>
+                <td class="tLeft" ><input type="text" class="huge" name="name" value="{$vo.name}" /></td>
+            </tr>
+            <tr>
+                <td class="tRight">专家头像：</td>
+                <td class="tLeft" >                    <if condition="$vo.pic neq ''"><img src="/{$vo.pic}" width="100" height="100" > </if>
+
+                    <input type="file" class="huge" name="imgFile">
+                    </td>
+            </tr>
+            <tr>
+                <td class="tRight">专家简介：</td>
+                <td class="tLeft" ><textarea name="jianjie" cols="47" rows="5">{$vo.jianjie}</textarea></td>
+            </tr>
+            <tr>
+                <td class="tRight">经验：</td>
+                <td class="tLeft" ><textarea name="rongyu" cols="47" rows="5">{$vo.rongyu}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="tRight" >擅长：</td>
+                <td class="tLeft" ><textarea name="zhicheng" cols="47" rows="5">{$vo.zhicheng}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="tRight">专家职称：</td>
+                <td class="tLeft" ><input type="text" class="huge " name="zhiwei" value="{$vo.zhiwei}" /></td>
+            </tr>
+            <tr>
+                <td class="tRight">其他：</td>
+                <td class="tLeft" ><textarea name="qita" cols="47" rows="5">{$vo.qita}</textarea></td>
+            </tr>
+            <tr>
+                <td class="tRight">排序：</td>
+                <td class="tLeft" ><input type="text" class="huge" name="order" value="{$vo.order}"></td>
+            </tr>
+            <tr>
+                <td>启用：</td>
+                <td>  <select name="status">
+                    <option value="1"
+                    <if condition="$vo.status eq 1">selected="selected"</if>
+                    >启用</option>
+                    <option value="0"
+                    <if condition="$vo.status eq 0">selected="selected"</if>
+                    >不启用</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="center"><div style="width:85%;margin:5px">
+                    <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+                    <input type="submit" value="保 存"  class="button small">
+                    <input type="reset" class="button small" onclick="resetEditor()" value="重 置" >
+                </div></td>
+            </tr>
+            </table>
+
+    </form>
+    </table>
+  </div>
+</div>

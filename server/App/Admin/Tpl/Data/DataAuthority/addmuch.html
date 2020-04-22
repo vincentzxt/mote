@@ -1,0 +1,165 @@
+<!DOCTYPE>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script language="javascript">
+//获得选中项的索引   
+	function ab(){
+      $a = $("select option:selected").attr('class');
+	 
+	  document.getElementById("Depth").value = parseInt($a) +1;
+	
+	}
+</script>
+</head>
+
+<body>
+<div id="doc">
+      <!--head开始-->
+      
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+        
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+            <ul class="tab_title">
+                <li><a href="__APP__/Data/DataAuthority">数据栏目管理</a></li>
+            	<li class="on"><a href="__APP__/Data/DataAuthority/addmuch">批量添加栏目</a></li>
+            </ul>
+          	<div class="mod-header radius clearfix"><h2>批量添加栏目</h2></div>
+            <div class="mod-body">
+            	<div class="content register_content_center">
+                     <form method='post' action="__URL__/SaveAddMuch">
+                        <table width="100%" cellspacing="0" cellpadding="0" class="data" >
+                        <thead>
+                            <tr>
+                                <td width="10%">&nbsp;</td>
+                                <td width="20%">&nbsp;</td> 
+                                <td width="60%">&nbsp;</td>                   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                <td style="text-align:right;" >分类名称： </td> 
+                                <td style="text-align:left; padding-left:10px;">
+                                <textarea name="Name" cols="45" rows="5"></textarea>
+                                <input name="c" value="{$c}" type="hidden"></td>
+                                <td style="text-align:left; padding-left:10px;"></td>
+                            </tr>
+                             <tr>
+                                <td style="text-align:right;">上级分类：</td> 
+                                <td style="text-align:left; padding-left:10px;">
+                                <label for="ParentId"></label>
+                                <select name="ParentId" id="sle" onchange="ab()">
+                                  <option value="0" class="0">根目录</option>
+                                   <volist name="sct" id="data">
+                                    <option value="{$data[0]}" class="{$data[5]}">{$data[3]}</option>
+                                   </volist>
+                                </select>
+                                <input type="text" name="Depth" value="1" id="Depth">
+                             </td>
+                                <td style="text-align:left; padding-left:10px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right;" >状态：</td> 
+                                <td style="text-align:left; padding-left:10px;" > <label for="Status"></label>
+                                <select name="Status">
+                                  <option value="1" selected="selected">开启</option>
+                                  <option value="0">关闭</option>
+                                </select>
+                                </td>
+                                <td style="text-align:left; padding-left:10px;" ></td>
+                            </tr>
+                            
+                            <tr>
+                                <td style="text-align:right;" >排序：</td>
+                                <td style="text-align:left; padding-left:10px;" ><input name="Priority" type="text"   value="1" /></td>
+                                <td style="text-align:left; padding-left:10px;" ></td>
+                            </tr>             
+                            <tr>
+                            	<td style="text-align:right;" ></td>
+                                <td colspan="2" style="padding-left:10px;">
+                                <input type="submit" name="button" id="button" value="提交" class="imgButton" />
+                                <input type="reset"  value="重置" class="imgButton" />
+                                <a href="__ROOT__/admin.php/Category/Index?c={$c}">返回列表</a>
+                                </td>
+                            </tr>
+                         </tbody>
+                        </table>
+                         </form>
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+    </div>
+
+
+<div class="right_wrap">
+	<div class="right_top">
+    	<div class="right_top_left"></div>
+        <div class="right_top_mid">
+        	<!--<div class="operation">界面操作</div>-->
+            <P>你当前的位置：<span>系统管理-添加栏目</span></P>
+            <div class="operation"><p>&nbsp;&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p></div>
+        </div>    
+        <div class="right_top_right"></div>
+    </div>
+    <div class="right_mid">
+    	<div class="right_mid_left"></div>
+        <div class="right_mid_mid">
+         
+</div>    
+        <div class="right_mid_right"></div>
+    
+    </div>
+    <div class="right_bottom">
+    	<div class="right_bottom_left"></div>
+        <div class="right_bottom_mid">
+        	<p class="page" style="font-size:12px;	color:#112535; margin:0; padding:0;width:300px; ">&nbsp;</p>
+        </div>    
+        <div class="right_bottom_right"></div>
+    </div>
+</div>
+
+
+<!--<h1>添加栏目</h1>
+<form method='post' action="__ROOT__/admin.php/Category/Index/SaveAddMuch">
+  <p>分类名称： <textarea name="Name" cols="45" rows="5"></textarea>
+   <input name="c" value="{$c}" type="hidden">
+  </p>
+  <p>上级分类：
+    <label for="ParentId"></label>
+    <select name="ParentId" id="sle" onchange="ab()">
+      <option value="0" class="0">根目录</option>
+       <volist name="sct" id="data">
+        <option value="{$data[0]}" class="{$data[3]}">{$data[2]}{$data[1]}</option>
+       </volist>
+    </select>
+  </p>
+  <input type="text" name="Depth" value="1" id="Depth">
+  <p>状态：
+    <label for="Status"></label>
+    <select name="Status">
+      <option value="1" selected="selected">开启</option>
+      <option value="0">关闭</option>
+    </select>
+  </p>
+
+  <p>排序：<input name="Priority" type="text"   value="1" /></p>
+  <p>
+    <input type="submit" value="提交" />
+  </p>
+
+</form>
+<a href="__ROOT__/admin.php/Category/Index?c={$c}">返回列表</a>-->
+</body>
+</html>

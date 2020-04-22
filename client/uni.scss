@@ -1,0 +1,61 @@
+/* 颜色变量 */
+
+/* 基本颜色 */
+$uni-color-primary: #2d8cf0;
+$uni-color-info: #2db7f5;
+$uni-color-success: #19be6b;
+$uni-color-warning: #ff9900;
+$uni-color-error: #ed3f14;
+$uni-color-link: #2D8cF0;
+$uni-color-link-hover: #5cadff;
+$uni-color-link-active: #2b85e4;
+$uni-color-tooltip: #fff;
+$uni-color-subsidiary: #80848f;
+$uni-color-rate-star: #f5a623;
+
+/* 文字基本颜色 */
+$uni-title-color:#1c2438;
+$uni-text-color:#495060;
+$uni-text-color-grey:#808695;
+$uni-text-color-placeholder:#c5c8ce;
+
+/* 背景颜色 */
+$uni-bg-color:#f7f7f7;
+$uni-bg-color-hover:#5cadff;
+
+/* 边框颜色 */
+$uni-border-color:#dddee1;
+$uni-split-color:#e9eaec;
+
+/* 尺寸变量 */
+/* padding尺寸 */
+$uni-padding-base:24upx;
+/* 文字尺寸 */
+$uni-font-size-min:26upx;
+$uni-font-size-sm:28upx;
+$uni-font-size-base:34upx;
+$uni-font-size-lg:38upx;
+
+/* 图片尺寸 */
+$uni-img-size-sm:40upx;
+$uni-img-size-base:52upx;
+$uni-img-size-lg:80upx;
+
+/* Border Radius */
+$uni-border-radius-sm: 4upx;
+$uni-border-radius-base: 6upx;
+$uni-border-radius-lg: 12upx;
+$uni-border-radius-circle: 50%;
+
+/* 水平间距 */
+$uni-spacing-row-sm: 5upx;
+$uni-spacing-row-base: 10upx;
+$uni-spacing-row-lg: 30upx;
+
+/* 垂直间距 */
+$uni-spacing-col-sm: 5upx;
+$uni-spacing-col-base: 10upx;
+$uni-spacing-col-lg: 30upx;
+
+/* 透明度 */
+$uni-opacity-disabled: 0.3; // 组件禁用态的透明度

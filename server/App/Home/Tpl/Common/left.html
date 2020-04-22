@@ -1,0 +1,12 @@
+<div class="right">
+    <h1>
+        {$basedh.title}
+        <small>{$basedh.url}</small>
+    </h1>
+    <nav>
+        <volist name="leftdh" id="leftdh">
+            <a href="__ROOT__/{$leftdh.url}"  <eq name="leftdh.url" value="$selfdh">class="on"</eq> >{$leftdh.title}</a>
+        </volist>
+        <div class="follower"></div>
+    </nav>
+</div>

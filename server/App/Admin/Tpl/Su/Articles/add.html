@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<load href='__PUBLIC__/Js/editor/kindeditor.js' />
+<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					allowFileManager : true
+				});
+				K('input[name=getHtml]').click(function(e) {
+					alert(editor.html());
+				});
+				K('input[name=isEmpty]').click(function(e) {
+					alert(editor.isEmpty());
+				});
+				K('input[name=getText]').click(function(e) {
+					alert(editor.text());
+				});
+				K('input[name=selectedHtml]').click(function(e) {
+					alert(editor.selectedHtml());
+				});
+				K('input[name=setHtml]').click(function(e) {
+					editor.html('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=setText]').click(function(e) {
+					editor.text('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=insertHtml]').click(function(e) {
+					editor.insertHtml('<strong>插入HTML</strong>');
+				});
+				K('input[name=appendHtml]').click(function(e) {
+					editor.appendHtml('<strong>添加HTML</strong>');
+				});
+				K('input[name=clear]').click(function(e) {
+					editor.html('');
+				});
+			});
+    KE.show({
+        id : 'content_1' //TEXTAREA输入框的ID
+   });
+   function checklevel(){
+	    id = $('#sctl').val();
+		$.ajax({
+		   type: "POST",
+		   url: "__APP__/Info/Ajax/ajaxfunc",
+		   data: "d=category&&b=&&l=&&t=1&&mf=pid&&mt=eq&&mv="+id,
+		   success: function(msg){
+			 //alert(msg);
+			 var obj = jQuery.parseJSON(msg);
+			 if(obj!=null){
+			     alert('不是根目录，不能添加文章！');
+				 $("#sctl").get(0).selectedIndex=0;//index为索引值
+				 
+			 }
+		   }
+		});
+   }
+</script>
+<style>
+<!--
+input.huge{width:350px; height:25px; line-height:25px;}
+-->
+</style>
+</head>
+
+<body>
+<div id="doc"> 
+  <!--head开始--> 
+  
+  <!--head结束-->
+  <div class="bd clearfix"> 
+    <!--左侧开始--> 
+    
+    <!--左侧结束-->
+    <div id="mainContainer">
+      <div class="mod mod1">
+        <ul class="tab_title">
+          <li><a href="__URL__/index">通知管理</a></li>
+          <li  class="on"><a href="__URL__/add">添加通知</a></li>
+        </ul>
+        <div class="mod-header radius clearfix">
+          <h2>用户组管理</h2>
+        </div>
+        <div class="mod-body mod-body-ie8">
+          <div class="content register_content_center">
+            <form method='post' id="form1" name="form1" action="__URL__/insert" enctype="multipart/form-data">
+              <table cellpadding=3 cellspacing=3 >
+              <tr>
+              <td>分公司管理</td>
+              <td>
+                <SELECT name="fgs_id" id="fgs_id" onChange="setfalg()">
+                        <option value="0" selected>请选择</option>
+                         <volist name="clist" id="vs">
+                          <option value="{$vs.id}">{$vs.name}</option>
+                          </volist>
+                        </SELECT>
+              </td>
+              </tr>
+              <tr>
+                <td class="tRight" width="10%">栏目：</td>
+                <td class="tLeft" ><select name="lanmu" id="sctl" onchange="checklevel();">
+                    <option value="0" class="0">请选择</option>
+                    <volist name="sct" id="data">
+                      <option value="{$data[0]}" class="{$data[5]}">{$data[3]}</option>
+                    </volist>
+                  </select></td>
+              </tr>
+              <tr>
+                <td class="tRight" width="10%">标题：</td>
+                <td class="tLeft" ><input type="text" class="huge" name="title"></td>
+              </tr>
+              <tr>
+                <td class="tRight" width="10%">标题图片：</td>
+                <td class="tLeft" ><input type="file" class="huge " name="image"></td>
+              </tr>
+             <!-- <tr>
+                <td class="tRight" width="10%">描述：</td>
+                <td class="tLeft" ><textarea name="des" cols="47" rows="5"></textarea></td>
+              </tr>
+              <tr>
+                <td class="tRight" width="10%">TAG：</td>
+                <td class="tLeft" ><input type="text" class="huge " name="tag">
+                  &nbsp;&nbsp;用,分离 否则视为一词</td>
+              </tr>-->
+              <tr>
+                <td class="tRight" width="10%">作者：</td>
+                <td class="tLeft" ><input type="text" class="huge " name="zuozhe" value="arth_author">
+                  &nbsp;&nbsp;设置默认作者</td>
+              </tr>
+             <!-- <tr>
+                <td class="tRight" width="10%" >出处：</td>
+                <td class="tLeft" ><input type="text" class="huge " value="arthweb" name="cchu"></td>
+              </tr>-->
+              <tr>
+                <td class="tRight" width="10%">文章状态：</td>
+                <td class="tLeft" ><select name="status">
+                    <option value="1">审核通过</option>
+                    <option value="2">等待审核</option>
+                  </select>
+                  &nbsp;&nbsp;默认审核通过</td>
+              </tr>
+            <!--  <tr>
+                <td class="tRight" width="10%">点击数：</td>
+                <td class="tLeft" ><input type="text" class="huge" name="dianji" value="0">
+                  &nbsp;&nbsp;默认为0</td>
+              </tr>-->
+              <tr>
+                <td class="tRight tTop">内容：</td>
+                <td class="tLeft"><textarea id="content_1" name="content" style="width:700px;height:300px;"></textarea></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td class="center"><div style="width:85%;margin:5px">
+                    <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+                    <input type="submit" value="保 存"  class="button small">
+                    <input type="reset" class="button small" onclick="resetEditor()" value="重 置" >
+                  </div></td>
+              </tr>
+            </form>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hiddenft"></div>
+</div>

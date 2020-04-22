@@ -1,0 +1,12 @@
+<div class="icon-tabs large">
+    <volist name="tophead" id="tophead" key="k">
+    <a href="__ROOT__/{$tophead.url}" class="<eq name='tophead.url' value='$onurl'>tab-on</eq>">
+        <i class="{$csstype[$k-1]}"></i>
+        <h2>
+            <div>{$tophead.title}</div>
+            <small>{$tophead.etitle}</small>
+            <div class="after"></div>
+        </h2>
+    </a>
+    </volist>
+</div>

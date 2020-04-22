@@ -1,0 +1,74 @@
+<div style="clear:both;"></div>
+<footer>
+    <nav>
+        <div class="inner">
+            <volist name="mapres" id="mapres">
+                <dl>
+                <dt>
+                    <a href="__ROOT__/{$mapres.url}">{$mapres.title}</a>
+                </dt>
+                    <volist name="mapres[0]" id="mapc1">
+                        <dd>
+                           <a href="__ROOT__/{$mapc1.url}">{$mapc1.title}</a>
+                        </dd>
+                    </volist>
+
+            </dl>
+            </volist>
+            <div class="qr">
+                <img src="__PUBLIC__/Data/thumbnail/share/images/default/p18nproo0g1k2nibu91s2199rc5.jpg_2000x2000.jpg" />
+            </div>
+            <p class="link-out">
+                <span class="bold">合作伙伴：</span>
+                <volist name="hz" id="hz">
+                    <a href="{$hz.url}" target="_blank">{$hz.title}<i class="link-to"></i></a>
+                </volist>
+
+            </p>
+        </div>
+    </nav>
+    <div class="contacts">
+        <div class="inner">
+            <p class="bold">联系</p>
+            <div class="left">
+                <p>{$web.webname}</p>
+                <p><a target="_blank" href="#">地址：{$web.dizhi}</a></p>
+            </div>
+            <div class="left">
+                <p>电话：{$web.dianhua}</p>
+                <p>网站：<a href="http://{$web.domain}">{$web.domain}</a></p>
+                <p>Email：<a href="mailto:{$web.email}">{$web.email}</a></p>
+            </div>
+
+            <div class="left last">
+                <p><span>工程：</span>
+                    <a target="_blank" href="#">北京</a>
+                    <a target="_blank" href="#">石家庄</a>
+                    <a target="_blank" href="#">武汉</a>
+                    <a target="_blank" href="#">南宁</a>
+                    <a target="_blank" href="#">海南</a>
+                </p>
+                <p><span>设计：</span>
+                    <a target="_blank" href="#">广州</a>
+                    <a target="_blank" href="#">北京</a>
+                    <a target="_blank" href="#">上海</a>
+                    <a target="_blank" href="#">武汉</a>
+                    <a target="_blank" href="#">海南</a>
+                    <a target="_blank" href="#">成都</a>
+                </p>
+                <p><span>苗木：</span>
+                    <a target="_blank" href="#">北京</a>
+                    <a target="_blank" href="#">石家庄</a>
+                    <a target="_blank" href="#">武汉</a>
+                    <a target="_blank" href="#">南宁</a>
+                    <a target="_blank" href="#">海南</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div style="background-color:#282828;text-align:center;padding:0 10px 10px 10px;">
+        <a target="_blank" href="/www.miitbeian.gov.cn/publish/query/indexFirst.action">{$web.beian}</a> 2005-2020 Quan Yuan Garden Co., Ltd.
+<script type="text/javascript" src="https://js.users.51.la/20727325.js"></script>
+</div>
+</footer>

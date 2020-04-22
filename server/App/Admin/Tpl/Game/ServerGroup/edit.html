@@ -1,0 +1,92 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<load href='__PUBLIC__/js/jquery-1.8.3.min.js' />
+
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/update" enctype="multipart/form-data">
+  <input type="hidden" name="uid" value="{$sess.uid}">
+   <input type="hidden" name="id" value="{$vo.id}">
+ 
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+ 
+  <tr>
+    <td class="tRight">选择游戏：</td>
+    <td class="tLeft" >
+    	<select name="aid">
+        <option value="0" class="0">请选择</option>
+        <volist name="agame" id="agame">
+          <option value="{$agame.id}" class="{$agame.id}"
+             <eq name="agame.id" value="$vo.aid">selected="selected"</eq>
+          >{$agame.chname}({$agame.enname})</option>
+        </volist>
+      </select>
+    </td>
+  </tr>
+   <tr>
+    <td class="tRight">选择游戏平台：</td>
+    <td class="tLeft" >
+    	<select name="pid">
+        <option value="0" class="0">请选择</option>
+        <volist name="GameLand" id="GameLand">
+          <option value="{$GameLand.id}" class="{$GameLand.id}"
+            <eq name="GameLand.id" value="$vo.pid">selected="selected"</eq>
+          >{$GameLand.chname}({$GameLand.enname})</option>
+        </volist>
+      </select>
+    </td>
+  </tr>
+ 
+  <tr>
+    <td class="tRight">游戏组ID：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="gid" id="gid" value="{$vo.gid}"></td>
+  </tr>
+  <tr>
+    <td class="tRight">游戏组名称：</td>
+    <td class="tLeft" ><input type="text" class="huge " name="gname" id="gname" value="{$vo.gname}">
+     </td>
+  </tr>
+  <tr>
+    <td class="tRight">项目名称：</td>
+    <td class="tLeft" ><input type="text" class="huge " name="project_name" id="project_name"  value="{$vo.project_name}"></td>
+  </tr>
+  <tr>
+    <td class="tRight">管理ip：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="mip" id="mip" value="{$vo.mip}">
+      &nbsp;&nbsp;</td>
+  </tr>
+   <tr>
+    <td class="tRight">游戏ip：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="gameip" id="gameip"  value="{$vo.gameip}">
+      &nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+                  <td class="tRight">状态：</td>
+                  <td><SELECT name="status">
+                      <option value="1" <eq name="vo.status" value="1">selected="selected"</eq>>开服</option>
+                      <option value="0" <eq name="vo.status" value="0">selected="selected"</eq>>关服</option>
+                      <option value="2" <eq name="vo.status" value="2">selected="selected"</eq>>维护</option>
+                    </SELECT></td>
+                </tr>
+  <tr>
+   <tr>
+    <td class="tRight">游戏繁忙程度：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="serverState" style=" width:50px;" value="{$vo.serverState}" id="serverState">
+      &nbsp;&nbsp;用1-100的数字表示繁忙程度</td>
+  </tr>
+  
+    <td></td>
+    <td class="center">
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+        <input type="submit" value="保 存"  class="button small" style="width:50px">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" class="button small" onClick="resetEditor()" style="width:50px" value="重 置" >
+      </td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

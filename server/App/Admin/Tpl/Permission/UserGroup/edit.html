@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+<meta http-equiv="Cache-Control" content="max-age=7200" />
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/lhgdialog/lhgdialog.min.js"></script>
+<script language="javascript">
+function selectUser(valname){
+					$.dialog({ 
+					 title: "单用户选择",
+					 width: 530,
+					 height: 400,
+					 content: 'url:__APP__/Permission/User/select_oneuser?valname='+valname,
+					 lock:true
+					});
+				
+				}
+</script>
+  <script language="javascript">
+  function select_bumen(){
+	  var id = $('#fgs_id').val();
+	  if(id==0)
+	  {
+		alert('请先选择公司');  
+	  }else{
+		 var flag = $('#bumenflag').val();
+		
+		
+		 if(flag==0){
+			  $.ajax({
+			   type: "POST",
+			   url: "__URL__/select_bumen",
+			   data: "company="+id,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#bm_id').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#bumenflag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+	
+  }
+  function setfalg(){
+	   $('#bumenflag').val(0);
+	   $('#bm_id').find("option").remove(); 
+	   $('#bm_id').append("<option value='0'>请选择</option>");
+  }
+  </script>
+</head>
+
+<body>
+<div id="doc">
+      <!--head开始-->
+     
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+  
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+              <include file="../common/common" />
+          	<div class="mod-header radius clearfix"><h2>节点管理</h2></div>
+            <div class="mod-body">
+            	<div class="content register_content_center">
+                	<form method='post'  id="form1" action="__URL__/update/">
+                    <input type="hidden" name="id" value="{$vo.id}" />
+                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                      <tr>
+                      <td>分公司：</td>
+                      <td><span class="tLeft">
+                         <SELECT name="fgs_id" id="fgs_id" onChange="setfalg()">
+                        <option value="0" >请选择</option>
+                         <volist name="list" id="vs">
+                          <option value="{$vs.id}" <eq name="vs.id" value="$vo['fgs_id']">selected</eq> >{$vs.name}</option>
+                          </volist>
+                        </SELECT>
+                      </span></td>
+                    </tr>
+                      <tr>
+                      <td>部门：</td>
+                      <td><span class="tLeft"><input type="hidden" name="bumenflag" id="bumenflag" value="0" />
+                        <SELECT name="bm_id" id="bm_id" onclick="select_bumen();">
+                           <option value="{$vo.bm_id}" selected>{$vo.bm_id|tobumen}</option>
+                        </SELECT>
+                      </span></td>
+                    </tr>
+                    <tr>
+                      <td class="tRight" >用户组名称：</td>
+                      <td class="tLeft" ><input type="text" class="medium bLeftRequire" check='Require' value="{$vo.name}" warning="显示名称必须"  name="name"></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight">状态：</td>
+                        <td class="tLeft"><SELECT name="status">
+                        <option <eq name="vo.status" value="1" >selected</eq> value="1">启用</option>
+                        <option <eq name="vo.status" value="0" >selected</eq> value="0">禁用</option>
+                        </SELECT></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight tTop">描 述：</td>
+                        <td class="tLeft"><TEXTAREA class="large bLeft" name="remark"  rows="5" cols="57">{$vo.remark}</textarea></td>
+                    </tr>
+                       <tr>
+                      <td>组长：</td>
+                      <td><input type="hidden" name="uid" id="uid" value="{$vo.uid}" />
+                        <input type="text" name="uid_name" id="uid_name" value="{$vo.uid|getusername}" />
+                      <input type="button" value="选择用户" onclick="selectUser('uid');" name="button"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="center"><input type="submit" value="保存" class="save imgButton"><input type="reset" class="reset imgButton" value="清空" ></td>
+                    </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+     
+    </div>
+
+
+</body>
+</html>

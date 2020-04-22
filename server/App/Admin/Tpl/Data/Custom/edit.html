@@ -1,0 +1,86 @@
+<!DOCTYPE>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script language="javascript">
+    //获得选中项的索引   
+	function ab(){
+      var a = $("select option:selected").attr('class');
+	  alert(a);
+	  document.getElementById("level").value = parseInt(a) + 1;
+	}
+</script>
+</head>
+<body>
+<div id="doc">
+      <!--head开始-->
+      
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+        
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+            <ul class="tab_title">
+                <li><a href="__APP__/Data/Customgroup/add">添加分类类型</a></li>
+                <li><a href="__APP__/Data/Customgroup/index">分类类型管理</a></li>
+                <li><a href="__APP__/Data/Custom/addmuch">添加自定义分类</a></li>
+                <li><a href="__APP__/Data/Custom/index"> 自定义分类管理</a></li>
+            </ul>
+          	<div class="mod-header radius clearfix"><h2>添加自定义分类</h2></div>
+            <div class="mod-body">
+            	<div class="content register_content_center">
+                    {$fanhui}
+                    <form method='post' id="form1" action="__URL__/update" >
+                    <input type="hidden" name="Id" value="{$vo.Id}">
+                    <table cellpadding=3 cellspacing=3>
+                    <tr>
+                      <td class="tRight" >分类名称：</td>
+                      <td class="tLeft" ><label for="textarea">
+                        <input name="Name" type="text" id="textfield2" value="{$vo.Name}" />
+                      </label></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >上级目录：</td>
+                        <td class="tLeft" >
+                        <select name="type">
+                         <volist name="sct" id="data">
+                            <option value="{$data['typeid']}" 
+                                            <eq name="data['typeid']" value="$vo.type">selected="selected"</eq>
+                            >{$data['name']}</option>
+                         </volist>
+                         </select></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >状态：</td>
+                        <td class="tLeft" ><select name="status">
+                          <option value="1" <if condition="$vo['status'] eq 1">  selected="selected" </if> >开启</option>
+                          <option value="0" <if condition="$vo['status'] eq 0">  selected="selected" </if> >关闭</option>
+                          </select></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >排序：</td>
+                        <td class="tLeft" ><label for="textfield"></label>
+                          <input name="Priority" type="text" id="textfield" value="1" /></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="submit" value="保 存" class="imgButton"><input type="reset" class="imgButton" value="清 空" ></td>
+                    </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+     
+    </div>
+
+
+</body>
+</html>

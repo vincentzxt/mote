@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/hot/hot",
+    "pages/my/my",
+    "pages/login/login"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#f79c53",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#777777",
+    "selectedColor": "#f79c53",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/index-0.png",
+        "selectedIconPath": "static/index-1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/hot/hot",
+        "iconPath": "static/hot-0.png",
+        "selectedIconPath": "static/hot-1.png",
+        "text": "推荐"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/my-0.png",
+        "selectedIconPath": "static/my-1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "nvueCompiler": "uni-app",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": false,
+    "autoclose": false
+  },
+  "appname": "模特推荐",
+  "compilerVersion": "2.6.1",
+  "usingComponents": {}
+}

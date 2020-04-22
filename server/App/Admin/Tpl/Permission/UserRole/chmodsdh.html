@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+
+<meta http-equiv="Cache-Control" content="max-age=7200" />
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+	var ids = '{$qx}';
+	$("input[name=key]").each(function(){ //由于复选框一般选中的是多个,所以可以循环输出选中的值
+	   var va = $(this).parent().parent().find('input[name="dhid[]"]').val();    
+  	  // alert(ids.indexOf(va));
+	   if(ids.indexOf(va)>-1){
+		   //alert(va);
+		   jQuery(this).attr("checked", true);  
+	   }
+	   //ids.push($(this).parent().parent().find('input[name="dhid[]"]').val());
+	  
+	   //selectyd(jQuery(this).val());
+	});
+})
+
+$('#role_id option').remove();
+function onchg(i){
+	$('#role_id').val('');
+	$('#role_name').val('');
+    $('#selt option').remove();
+	 //输入 数据库表名称$d,$b,$l，返回字段类型$t(type)（0：值，1：列表）,返回字段条件(1,字段mf，2，条件mt，3要求mv)
+	$.ajax({
+	   type: "POST",
+	   url: "__APP__/Ajax/ajaxfunc",
+	   data: "d=user&&b=role&&l=_&&t=1&&mf=pid&&mt=eq&&mv="+i.value,
+	   success: function(msg){
+		 //alert(msg);
+		 var obj = jQuery.parseJSON(msg);
+		 for(var i=0;i<obj.length;i++){
+		     $('#selt').append('<option value="' + obj[i]['id'] + '">' + obj[i]['name'] + '</option>')	 
+		 }
+	   }
+	});
+}
+function moval(){
+	$('#role_id').val('');
+	$('#role_name').val('');
+	$('#role_id').val($('#selt').val());
+	$('#role_name').val($('#selt :selected').text()); 
+}
+
+function checkall(i){
+		$("#ss" + i + " :checkbox").attr("checked",'true');//全选  
+}
+function checknoall(i,n){
+		$("#ss" + i + " :checkbox").removeAttr("checked");//取消全选  
+}
+//批量插入
+function selectAllinsert(){
+	var role_id = $('input[name="role_id"]').val();
+	var ids =new Array();
+	//	s.push($(this).val());
+	$("input[name=key]:checked").each(function(){ //由于复选框一般选中的是多个,所以可以循环输出选中的值    
+  	   ids.push($(this).parent().parent().find('input[name="dhid[]"]').val());
+	  // jQuery(this).attr("checked", true);  
+	   //selectyd(jQuery(this).val());
+	});
+	$.ajax({
+	   type: "POST",
+	   url: "__URL__/chmoddhsave",
+	   data: "role_id="+role_id+"&ids="+ids,
+	   success: function(msg){
+		   if(msg==1){
+			   alert('授权成功！');   
+		   }else{
+			   alert('授权失败！');   
+		   }
+	   }
+	});    
+	//alert(ids);
+}
+
+</script>
+
+</head>
+<body>
+<div id="doc"> 
+  <!--head开始--> 
+  
+  <!--head结束-->
+  <div class="bd clearfix"> 
+    <!--左侧开始--> 
+    
+    <!--左侧结束-->
+    <div id="mainContainer">
+      <div class="mod mod1">
+		  <include file="../common/common" />
+        <div class="mod-header radius clearfix">
+          <h2>角色授权操作</h2>
+        </div>
+        <div class="mod-body">
+          <div class="content register_content_center">
+            <form method='post' id="form1" action="__URL__/chmoddhsave/" >
+             
+              <p> 操作角色：</p>
+                 <b style="color:green;">用户组</b>：<b style="color:#000000"> {$userdata['pid']|toUserGroup}</b><br>
+                    <div style="padding-left:60px; font-size:12px; color:blue">|---{$userdata['name']}</div>
+                    <input size="1" type="hidden" name="role_id" id="role_id" class="small bLeft" value="{$userdata['id']}" style="width:100px"  onfocus=this.blur() />
+                    
+               <p>导航权限分配：</p>
+                  <!-- 列表显示区域  -->
+                    <tagLib name="html" />
+                    <div class="" >
+                    <div id="result" class="result none"></div>
+                   <html:list id="checkList" name="node" style="list" checkbox="true" action="true" datasource="list" show="0|chg_role_input='dhid[]':编号,3:数据栏目:child" actionlist=":无" />
+                    </div>
+                    <!--  分页显示区域 -->
+                    <div class="page">{$page}</div>
+                 
+                 <input type="button" value="保存" onClick="selectAllinsert()" class="imgButton">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hiddenft"></div>
+</div>
+</body>
+</html>

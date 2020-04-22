@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+
+<meta name="csrf-param" content="authenticity_token">
+
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script language="javascript">
+   function ab(){
+      var a = $("select option:selected").attr('class');
+	  document.getElementById("level").value = parseInt(a) + 1;
+	}
+</script>
+</head>
+
+<body>
+<div id="doc"> 
+  <!--head开始--> 
+  
+  <!--head结束-->
+  <div class="bd clearfix"> 
+    <!--左侧开始--> 
+    
+    <!--左侧结束-->
+    <div id="mainContainer">
+      <div class="mod mod1">
+        <ul class="tab_title">
+          <li><a href="__URL__/index">通知分类管理</a></li>
+          <li class="on"><a href="#">编辑通知分类</a></li>
+        </ul>
+        <div class="mod-header radius clearfix">
+          <h2>编辑用户角色</h2>
+        </div>
+        <div class="mod-body">
+          <div class="content register_content_center">
+            <form method='post' action="__URL__/update">
+              <input type="hidden" name="id" value="{$vo.id}" />
+              <table cellspacing="0" cellpadding="0" class="data" >
+                <tbody>
+                  <tr>
+                    <td style="text-align:right;" >分类名称： </td>
+                    <td style="text-align:left; padding-left:10px;"><input type="text" name="title" value="{$vo.title}" /></td>
+                  </tr>
+                  <!--<tr>
+                    <td style="text-align:right;">上级分类：</td>
+                    <td style="text-align:left; padding-left:10px;"><select name="pid" id="sle" onchange="ab()">
+                        <option value="0" class="0">根目录</option>
+                        <volist name="sct" id="data"> <option value="{$data[0]}" class="{$data[5]}"
+                        
+                          <eq name="data[0]" value="$vo.pid">selected="selected"</eq>
+                          >{$data[3]}
+                          </option>
+                        </volist>
+                      </select>
+                      <input type="hidden" name="level" value="{$vo.level}" id="level"></td>
+                  </tr>-->
+                  <tr>
+                    <td style="text-align:right;" >状态：</td>
+                    <td style="text-align:left; padding-left:10px;" ><select name="status">
+                        <option value="1" 
+                        <if condition="$vo['status'] eq 1">  selected="selected" </if>
+                        >开启
+                        </option>
+                        <option value="0" 
+                        <if condition="$vo['status'] eq 0">  selected="selected" </if>
+                        >关闭
+                        </option>
+                      </select></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:right;" >排序：</td>
+                    <td style="text-align:left; padding-left:10px;" ><input name="sort" type="text"  size="10" maxlength="10" value="{$vo['sort']}" /></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <input type="submit" name="button" id="button" value="提交" class="imgButton"  />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hiddenft"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<header>
+    <div class="header-top">
+        <a href="#" ><img src="/{$web.logo}" class="logo" /></a>
+        <div class="share right">
+            <div class="wechat_qr hidden">
+                <img src="__PUBLIC__/Data/thumbnail/share/images/default/p18lpou0t9lgdqk617m418fn2ur5.jpg_2000x2000.jpg" width="100" height="100" />
+            </div>
+            <a id="share_wechat">
+                <i class="share-wechat"></i>
+            </a>
+        </div>
+        <div class="right tel" style="display: none">
+            <a href="#">购销平台</a>
+            |
+            <a href="#">员工登录</a>
+            |
+            <label>#</label>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse">
+        <nav class="nav-collapse collapse navbar-inner">
+            <div class="container">
+
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="menuName">菜单</span>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav navmenu" id="navmenu">
+                        <li>
+                            <a href="__ROOT__/{$dh.url}" <eq name="objurl" value="Index">class="on"</eq> >首页</a>
+                        </li>
+                        <volist name="dhlist" id="dhlist">
+                            <li class="dropdown">
+                                <a class="<eq name="objurl" value="$dhlist.url">on</eq> dropdown dropdown-toggle" href="__ROOT__/{$dhlist.url}" data-toggle="dropdown">{$dhlist.title}</a>
+                                <div class="dropdown-menu" >
+                                    <volist name="dhlist[0]" id="dh">
+                                        <a href="__ROOT__/{$dh.url}">{$dh.title}</a>
+                                    </volist>
+                                </div>
+                            </li>
+                        </volist>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

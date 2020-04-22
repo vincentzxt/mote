@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<load href='__PUBLIC__/Admin/Css/blue.css' />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script language="javascript">
+    //获得选中项的索引   
+	function ab(){
+      var a = $("select option:selected").attr('class');
+	  alert(a);
+	  document.getElementById("level").value = parseInt(a) + 1;
+	}
+</script>
+</head>
+
+<body>
+<h1>添加栏目</h1>
+
+<form method='post' action="__URL__/Insert">
+
+  <p>分类名称：<input type="text" name="title" value="" />
+  </p>
+  <p>分类别名：<input type="text" name="etitle" value="" />
+  </p>
+  <p>分类操作名：<input type="text" name="rename" value="" />
+  </p>
+  <p>上级分类：
+    <label for="ParentId"></label>
+    <select name="pid" id="sle" onchange="ab()">
+      <option value="0" class="0">根目录</option>
+       <volist name="sct" id="data">
+        <option value="{$data[0]}" class="{$data[5]}">{$data[3]}</option>
+       </volist>
+    </select>
+  </p>
+  <input type="text" name="level" value="1" id="level">
+  <p>状态：
+    <select name="status">
+      <option value="1" selected="selected">开启</option>
+      <option value="0">关闭</option>
+    </select>
+  </p>
+  <p>地址：<input name="url" type="text"   value="1" /></p>
+  <p>排序：<input name="sort" type="text"   value="1" /></p>
+  <p>
+    <input type="submit" value="提交" />
+  </p>
+
+</form>
+<a href="__ROOT__/admin.php/Category/Index?c={$c}">返回列表</a>
+</body>
+</html>

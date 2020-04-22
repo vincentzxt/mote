@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+  <title>{$title}</title>
+  
+ <meta http-equiv="Cache-Control" content="max-age=7200" />
+
+  <link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script language="javascript">
+$('#role_id option').remove();
+function onchg(i){
+	$('#role_id').val('');
+	$('#role_name').val('');
+    $('#selt option').remove();
+	 //输入 数据库表名称$d,$b,$l，返回字段类型$t(type)（0：值，1：列表）,返回字段条件(1,字段mf，2，条件mt，3要求mv)
+	$.ajax({
+	   type: "POST",
+	   url: "__APP__/Ajax/ajaxfunc",
+	   data: "d=user&&b=role&&l=_&&t=1&&mf=pid&&mt=eq&&mv="+i.value,
+	   success: function(msg){
+		 //alert(msg);
+		 var obj = jQuery.parseJSON(msg);
+		 for(var i=0;i<obj.length;i++){
+		     $('#selt').append('<option value="' + obj[i]['id'] + '">' + obj[i]['name'] + '</option>')	 
+		 }
+	   }
+	});
+}
+function moval(){
+	$('#role_id').val('');
+	$('#role_name').val('');
+	$('#role_id').val($('#selt').val());
+	$('#role_name').val($('#selt :selected').text()); 
+}
+function selectis(n){
+	//测试为选中
+	if($('#sel'+n).is(':checked')){
+	   //add ctrolbtn
+	   $('#ss'+n).append('<input type="button" onclick="checkall('+ n +')" value="全选" /><input type="button" onclick="checknoall('+ n +')" value="全不选" />');
+	   //获取子模块等；
+	   $.ajax({
+		   type: "POST",
+		   url: "__APP__/Ajax/ajaxfunc",
+		   data: "d=node&&b=&&l=&&t=1&&mf=pid&&mt=eq&&mv="+n,
+		   success: function(msg){
+				 var obj = jQuery.parseJSON(msg),str;
+				 if(obj==null){
+					 $('#ss'+n).append("子分类为空");
+				 }else{
+					 for(var i=0;i<obj.length;i++){
+						
+					    if(obj[i]['level']==3){
+							var html = '<div class="chd'+ obj[i]['level'] +'" id="ss'+ obj[i]['id'] +'"><input type="checkbox" name="chmod" id="sel'+ obj[i]['id'] +'" value="'+ obj[i]['id'] +'">'+ obj[i]['name'] + obj[i]['title'] +'</div>';
+					    }else{
+							var html = '<div class="chd'+ obj[i]['level'] +'" id="ss'+ obj[i]['id'] +'"><input type="checkbox" name="chmod" id="sel'+ obj[i]['id'] +'" value="'+ obj[i]['id'] +'" onclick="selectis('+ obj[i]['id'] +')">'+ obj[i]['name'] + obj[i]['title'] +'</div>';
+						}
+						$('#ss'+n).append(html);
+					 }
+				 }
+				
+		   }
+		});
+	}else{
+		checknoall(n);
+	}
+}
+function checkall(n){
+	 $('#ss'+ n +' div :checkbox').attr("checked",'true');//全选  
+}
+function checknoall(n){
+	 $('#ss'+ n +' div :checkbox').removeAttr("checked");//取消全选  
+}
+
+</script>
+<style>
+<!--
+div.chd2{ padding-left:20px;}
+div.chd3{ padding-left:20px;padding-right:15px;}
+-->
+</style>
+</head>
+<body>
+<div id="doc">
+      <!--head开始-->
+    
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+     
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+            <ul class="tab_title">
+                <li><a href="../UserGroup/">用户组管理</a></li>
+                 <li><a href="__URL__/../UserCompany/">分公司管理</a></li>
+          <li><a href="__URL__/../UserBumen/">部门管理</a></li>
+                <li><a href="../UserRole/">系统角色管理</a></li>
+                <li><a href="../User/">用户列表</a></li>
+            </ul>
+          	<div class="mod-header radius clearfix"><h2>节点管理</h2></div>
+            <div class="mod-body">
+            	<div class="content register_content_center">
+                	<form method='post' id="form1" action="__URL__/insert/" >
+                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                    <tr>
+                        <td width="80" rowspan="2" class="tRight_pos" >角色选择：</td>
+                        <td width="441" class="tLeft" >
+                        <SELECT size="8" class="small bLeft" style="width:100px" onChange="onchg(this)">
+                        <volist name="glist" id="vo">
+                           <option value="{$vo.id}">{$vo.name}</option>
+                        </volist>
+                        </SELECT>
+                        <select size="8" id="selt" onChange="moval()" class="small bLeft"  style="width:100px">
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLeft" >
+                        <input size="1" type="hidden" name="role_id" id="role_id" class="small bLeft" style="width:100px"/>
+                        <input size="1" name="role_name" id="role_name" class="small bLeft" style="width:100px"/>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td height="318" class="tRight_pos">权限分配：</td>
+                      <td class="tLeft">
+                        <div>
+                          <ul>
+                            <volist name="list" id="vt">
+                             <li id="ss{$vt[0]}"><input type="checkbox" name="chmod" id="sel{$vt[0]}" value="{$vt[0]}" onClick="selectis({$vt[0]})">{$vt[1]}({$vt[3]})</li>
+                            </volist>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height="40" class="tRight_pos"></td>
+                      <td class="tLeft">
+                       <input type="submit" value="保存" class="imgButton">
+                      </td>
+                    </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+     
+    </div>
+
+
+</body>
+</html>

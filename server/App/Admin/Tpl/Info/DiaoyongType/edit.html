@@ -1,0 +1,70 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<load href='__PUBLIC__/js/jquery-1.8.3.min.js' />
+<script>
+
+  
+   function checklevel(){
+	    id = $('#sctl').val();
+		$.ajax({
+		   type: "POST",
+		   url: "__APP__/Info/Ajax/ajaxfunc",
+		   data: "d=data_authority&&b=&&l=&&t=1&&mf=pid&&mt=eq&&mv="+id,
+		   success: function(msg){
+			 //alert(msg);
+			 var obj = jQuery.parseJSON(msg);
+			 if(obj!=null){
+			     alert('不是根目录，不能添加文章！');
+				 $("#sctl").get(0).selectedIndex=0;//index为索引值
+				 
+			 }
+		   }
+		});
+   }
+</script>
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/update" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$vo.id}">
+
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+
+
+
+    <tr>
+      <td class="tRight">名称：</td>
+      <td class="tLeft" ><input type="text" class="huge" name="title" id="title" value="{$vo.title}"></td>
+    </tr>
+    <tr>
+      <td class="tRight">内容：</td>
+      <td class="tLeft" >
+        <textarea name="content" style="width: 530px; height: 150px">{$vo.content}</textarea>
+      </td>
+    </tr>
+      <tr>
+          <td>启用：</td>
+          <td>  <select name="status">
+              <option value="1"
+              <if condition="$vo.status eq 1">selected="selected"</if>
+              >启用</option>
+              <option value="0"
+              <if condition="$vo.status eq 0">selected="selected"</if>
+              >不启用</option>
+          </select></td>
+      </tr>
+  <tr>
+    <td></td>
+    <td class="center">
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+        <input type="submit" value="保 存"  class="button small" style="width:50px">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" class="button small" onClick="resetEditor()" style="width:50px" value="重 置" >
+      </td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

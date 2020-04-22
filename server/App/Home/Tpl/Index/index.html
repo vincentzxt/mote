@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$web.webname}</title>
+	<meta name="keywords" content="{$web.meta}" />
+	<meta name="description" content="{$web.meta}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="QCto7nlGwr" />
+<!--[if lt IE 9]>
+    <script src="__PUBLIC__/home/js/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="__PUBLIC__/home/css/styles.css"/>
+</head>
+
+<body  data-components="slider">
+
+<include file="../Common/head" />
+
+<include file="../Common/tophead" />
+
+	
+	<section class="slider" id="slider">
+	<a class="slider-btn slider-prev"></a>
+	<a class="slider-btn slider-next"></a>
+	<ul class="slider-flow">
+		<volist name="banlist" id="banlist">
+			<li _background="{$banlist.pic}">
+			<div class="slider-area center">
+								<a href=" " class="titlebox">
+					<h1>{$banlist.name}</h1>
+					<h2>{$banlist.title}</h2>
+					<h3>{$banlist.ftitle}</h3>
+					<p>{$banlist.con}</p>
+				</a>
+			</div>
+		</li>
+		</volist>
+			</ul>
+	<div class="slider-nav"></div>
+</section>
+
+	<section class="content center">
+		<div class="news-covers">
+			<div class="column">
+				<h2 class="news-title">
+					<a class="name" href="/Showcases">精选案例 </a>
+					<small class="more">SHOWCASES</small>
+				</h2>
+				<div class="plist">
+					<div class="big">
+						<a class="imagebox" href="/Showcases/detail/id/{$alcom.id}"><img src="{$alcom.Imageurl}"></a>
+						<a href="/Showcases/detail/id/{$alcom.id}">
+							<h2>
+								<span href="/Showcases/detail/id/{$alcom.id}" class="wrap title">{$alcom.title}</span>
+								<small>{$alcom.description}</small>
+							</h2>
+						</a>
+						<p>
+							<strong>{$alcom.hits}</strong>平方米
+							<i class="link-to"></i>
+						</p>
+					</div>
+					<volist name="alnocom" id="alnocom">
+						<a class="list-item" href="/Showcases/detail/id/{$alnocom.id}">
+							<span class="right">{$alnocom.hits}平方米 <i class="link-to"></i></span>
+							<span class="name">{$alnocom.title}</span>
+						</a>
+					</volist>
+				</div>
+			</div>
+			<div class="column">
+				<h2 class="news-title">
+					<a class="name" href="/News">公司资讯</a>
+					<small class="more">NEWS</small>
+				</h2>
+				<div class="nlist">
+						<volist name="news" id="news" key="k">
+							<div <gt name="k" value="2">style="display:none;"</gt> class="adBoxs">
+								<a href="/News/detail/id/{$news.id}" class="imagebox"><img src="/{$news.Imageurl}"></a>
+								<div class="sep"></div>
+								<a href="/News/detail/id/{$news.id}" style="margin-bottom:20px;">
+									<small class="date">{$news.time|toDate}</small>
+									<i class="link-to right"></i>
+									<span class="name">{$news.title}</span>
+								</a>
+							</div>
+						</volist>
+							<div class='yyy'>
+								<span class="yy y1 current"></span>
+								<span class="yy y2"></span>
+								<span class="yy y3"></span>
+							</div>
+							<style>
+							.yyy{height:14px;width:55px;margin:0 auto;margin-bottom:20px;}
+							.yyy .y1,.yyy .y2,.yyy .y3{ display:block;width:14px;margin:0 2px;height:13px;background-color:#999;float:left;cursor:pointer; }
+							.yyy .yy.current{background-color:#34BA88;}
+							</style>
+						<volist name="newsnopic" id="newsnopic">
+							<div>
+								<a href="/News/detail/id/{$news.id}" style="margin-bottom:16px;">
+									<small class="date">{$newsnopic.time|toDate}</small>
+									<i class="link-to right"></i>
+									<span class="name">{$newsnopic.title}</span>
+								</a>
+							</div>
+						</volist>
+
+
+			     </div>
+			</div>
+			<div class="column">
+				<h2 class="news-title">
+					<a class="name" href="/News/projects">最新项目</a>
+					<small class="more">NEW PROJECTS</small>
+				</h2>
+				<div class="nlist pad-bot">
+						<a href="/News/detail/id/{$xm.id}" class="imagebox"><img src="/{$xm.Imageurl}"></a>
+						<div class="sep"></div>
+						<a href="/News/detail/id/{$xm.id}">
+							<span class="right">{$xm.hits}平方米 <i class="link-to"></i></span>
+							<span class="name">{$xm.title}</span>
+						</a>
+				</div>
+				<h2 class="news-title">
+					<a class="name" href="/research/intro.html">招聘中心</a>
+					<small class="more">INSTITUTE NEWS</small>
+				</h2>
+				<div class="nlist">
+					<volist name="jobs" id="jobs">
+						<a href="/Jobs/detail/id/{$jobs.id}" style="margin-bottom:34px;">
+						<small class="date"></small>
+						<i class="link-to right"></i>
+						<span class="name">{$jobs.title}</span>
+					</a>
+					</volist>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+<include file="../Common/foot" />
+
+<div id="btn_top" class="btn_top"><div class="btn_top_wrap"></div></div>
+
+
+<!--[if lte IE 6]>
+<script src="__PUBLIC__/home/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>DD_belatedPNG.fix('img');</script>
+<script type="text/javascript" src="__PUBLIC__/share/js/minmax.js"></script>
+<![endif]-->
+<script src="__PUBLIC__/home/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 100){
+                $('#btn_top').fadeIn(300);
+            }else{
+                $('#btn_top').fadeOut(300);
+            }
+        });
+        $('#btn_top').click(function(){$('html,body').animate({scrollTop: '0px'}, 0);});
+    });
+</script>
+
+<script type="text/javascript">
+
+    /**
+     * 手机版的menu的data-toggle
+     */
+    (function($){
+        if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            var $a =  $('#navmenu .dropdown > a'),
+                    firstValid = false;
+            $a.each(function(){
+                var $item = $(this);
+                if(firstValid){
+                    $item.removeAttr('data-toggle');
+                }else{
+                    firstValid = true;
+                }
+
+            });
+        }else{
+            //地址a标签替换
+            var pathname = location.pathname;
+            pathname = pathname.replace(".html",'');
+            var $link = $('#navmenu .dropdown a');
+            $link.each(function(){
+                var $a = $(this),
+                        href = $a.attr('href');
+                href = href.replace('.html','');
+                if(pathname.indexOf(href) >=0){
+                    $a.addClass('on');
+                }
+            });
+        }
+    })($);
+</script>
+
+<script src="__PUBLIC__/home/js/plugins.js"></script>
+<script src="__PUBLIC__/home/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/home/js/jquery.colorbox-min.js"></script>
+
+<script src="__PUBLIC__/home/js/iscroll.js"></script>
+
+<script type="text/javascript">
+    // 菜单scroll，当菜单栏宽度过短时隐藏两边按钮
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        var $scrollNav = $('nav.sub-nav');
+        if($scrollNav.length){
+            $children = $scrollNav.find('.inner a');
+            var scrollWidth = 0,
+                    scrollLeft = 0;
+            $children.each(function(){
+                //console.log($(this).outerWidth(true));
+                var ele = $(this);
+                if(ele.hasClass('on')){
+                    scrollLeft = scrollWidth;
+                }
+                scrollWidth += ele.outerWidth(true);
+            });
+            //隐藏两边按钮
+            if($scrollNav.width() - 40 >= scrollWidth){
+                $scrollNav.addClass('hideDir');
+
+            }else{
+                scrollWidth +=40;
+                $scrollNav.find('.inner').width(scrollWidth);
+                var myScroll = new iScroll($scrollNav[0],{
+                    vScroll : false,
+                    hScroll : true,
+                    hScrollbar: false,
+                    onBeforeScrollStart : function(e){
+                        $('.sub-nav').addClass('start');
+                        e.preventDefault();
+                    },
+                    onTouchEnd : function(){
+                        $('.sub-nav').removeClass('start');
+                    }
+                });
+                myScroll.scrollTo(-scrollLeft);
+            }
+
+
+
+        }
+    }
+
+
+
+</script>
+
+	<script>
+	$(function(){
+		var adCurrent = 2;
+		var fadeInTime = 1000;
+		var settime = setInterval(runing,3000);
+		var stop = false;
+		//鼠标点击小图标当前位置
+		$('.yyy .yy').click(function(){
+			if($(this).hasClass('current'))
+				return false;
+			$('.yyy .yy').removeClass('current');
+			$(this).addClass('current');
+			local = $('.yyy .yy.current').index();
+			$('.adBoxs').hide();
+			$('.adBoxs').eq(adCurrent).fadeIn(fadeInTime);
+			adCurrent++;
+			$('.adBoxs').eq(adCurrent).fadeIn(fadeInTime);
+			adCurrent++;
+			if(adCurrent>=6){
+				adCurrent=0;
+			}
+		});
+		//mouseMove
+		$('.yy,.nlist').hover(function(){
+			stop = true
+			//clearInterval(settime);
+		},function(){
+			stop = false;
+			//settime = setInterval(runing,3000);
+		});
+		//runing
+		function runing(){
+			if(stop==true) return false;
+			$('.adBoxs').hide();
+			$('.adBoxs').eq(adCurrent).fadeIn(fadeInTime);
+			adCurrent++;
+			$('.adBoxs').eq(adCurrent).fadeIn(fadeInTime);
+			adCurrent++;
+			if(adCurrent>=6){
+				adCurrent=0;
+			}
+			//小图标当前位置
+			local = $('.yyy .yy.current').index();
+			$('.yyy .yy').removeClass('current');
+			if(local==2){
+				$('.yyy .yy').eq(0).addClass('current');
+			}else{
+				$('.yyy .yy').eq(local+1).addClass('current');
+			}
+		}
+	});
+	</script>
+</body>
+</html>

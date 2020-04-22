@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+
+<meta name="csrf-param" content="authenticity_token">
+
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/Base.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript">
+function add(){
+    window.location = "__URL__/add";	
+}
+
+function edit(x){
+	window.location = "__URL__/edit/{$x}/" + x;
+}
+function del(x){
+	window.location =  "__URL__/del/{$x}/" + x;
+}
+function chmod(x){
+	window.location =  "__GROUP__/UserRole/chmods/{$x}/" + x;
+}
+function chmoddh(x){
+	window.location =  "__GROUP__/UserRole/chmodsdh/{$x}/" + x;
+}
+</script>
+<script language="javascript">
+ 
+  function select_bumen(){
+	  var id = $('#fgs_id').val();
+	  if(id==0)
+	  {
+		alert('请先选择公司');  
+	  }else{
+		 var flag = $('#bumenflag').val();
+		 $('#groupflag').val(0);
+		 $('#group_id').find("option").remove(); 
+		 $('#group_id').append("<option value='0'>请选择</option>");
+		
+		 if(flag==0){
+			  $.ajax({
+			   type: "POST",
+			   url: "__URL__/select_bumen",
+			   data: "company="+id,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#bm_id').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#bumenflag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+	
+  }
+  
+    //选择组
+  function select_group(){
+	  var cid = $('#fgs_id').val();
+	  var bmid =  $('#bm_id').val();
+
+	  if(cid==0&&bmid==0)
+	  {
+		alert('请先选择分公司或者部门');  
+	  }else{
+		 var flag = $('#groupflag').val();
+		 $('#roleflag').val(0);
+		 $('#role_id').find("option").remove(); 
+		 $('#role_id').append("<option value='0'>请选择</option>");
+		
+		 if(flag==0){
+			  $.ajax({
+			   type: "POST",
+			   url: "__APP__/Permission/User/select_group",
+			   data: "bumen="+bmid,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#group_id').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#groupflag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+  }
+  
+     //选择角色
+  function select_role(){
+	  var cid = $('#fgs_id').val();
+	  var bmid =  $('#bm_id').val();
+	  var groupid =  $('#group_id').val();
+
+	  if(cid==0||bmid==0||groupid==0)
+	  {
+		alert('请先选择分公司/部门/组');  
+	  }else{
+		 var flag = $('#roleflag').val();
+		
+		
+		 if(flag==0){
+			  $.ajax({
+			   type: "POST",
+			   url: "__APP__/Permission/User/select_role",
+			   data: "group="+groupid,
+			   dataType: "json",
+			   success: function(msg){
+				   
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						  alert(item.name);
+						 
+						 $('#role_id').append("<option value='0'>请选择</option>");
+						 $('#role_id').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#roleflag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+  }
+  function setfalg(){
+	 $('#bumenflag').val(0);
+	 $('#groupflag').val(0);
+	 
+	 $('#bm_id').find('option').remove();
+				  
+ }
+  </script>
+<body>
+<div id="doc">
+  <!--head开始-->
+  <!--head结束-->
+  <div class="bd clearfix">
+    <!--左侧开始-->
+    <!--左侧结束-->
+    <div id="mainContainer">
+      <div class="mod mod1">
+		  <include file="../common/common" />
+        <div class="mod-header radius clearfix">
+          <h2>用户列表</h2>
+        </div>
+        <div class="mod-body mod-body-ie8">
+          <div class="content register_content_center">
+            <html:imageBtn name="add" value="添加用户" click="add()" style="impBtn hMargin fLeft shadow" />
+            <div class="user marginB15">
+              <div class="floatL div_margin"><input type="hidden" name="bumenflag" id="bumenflag" value="0" />
+                <form action="" method="post" name="chaxun">
+                  分公司：
+                  <SELECT name="fgs_id" id="fgs_id" style="width:100px" onChange="setfalg()">
+                    <option value="">请选择</option>
+                    <volist name="clist" id="vo0">
+                      <option value="{$vo0.id}" <eq name="req.fgs_id" value="$vo0.id">selected="selected"</eq>>{$vo0.name}</option>
+                    </volist>
+                  </SELECT>
+                   部门：<input type="hidden" name="bumenflag" id="bumenflag" value="0" />
+                  <SELECT name="bm_id" id="bm_id" style="width:100px"  onclick="select_bumen();">
+                    <option value="">请选择</option>
+                    <volist name="str1" id="vo1">
+                      <option value="{$vo1.Id}" <eq name="req.bm_id" value="$vo1.id">selected="selected"</eq>>{$vo1.Name}</option>
+                    </volist>
+                  </SELECT>
+                    组：<input type="hidden" name="groupflag" id="groupflag" value="0" />
+                  <SELECT name="group_id" id="group_id" style="width:100px" onclick="select_group()">
+                    <option value="">请选择</option>
+                    <volist name="glist" id="vo">
+                      <option value="{$vo.id}" <eq name="req.group_id" value="$vo.id">selected="selected"</eq>>{$vo.name}</option>
+                    </volist>
+                  </SELECT>
+                  最后登陆时间：
+                  <input type="text" name="last_login_time" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+                  <input type="submit" value="检索" class="jiansuo">
+                </form>
+                <br>
+                提示：<font color="#FF0000">授权成功请更新缓存！ </font>权限管理-》数据管理-》缓存清除  即可 （需要超级权限）
+              </div>
+              <div class="cls"></div>
+            </div>
+            <!-- 列表显示区域  -->
+            <tagLib name="html" />
+            <div class="list" >
+              <div id="result" class="result none"></div>
+              <html:list id="checkList" name="node" style="list" checkbox="true" action="true" datasource="list" show="id:序号,account:登录名,username:姓名|10%,fgs_id|tocompany:分公司,bm_id|tobumen:部门名称,role_id|uroleishave:组/职位|15%,email:邮箱|10%,create_time|toDate:创建时间,last_login_time|toDate:最后登录时间,last_login_ip|default=从未登录:最后登录IP,login_count:登录次数,status|getStatus:启用/禁用,remark:备注,qx|toDataGroup:权限" actionlist="chmoddh:导航授权:role_id,chmod:功能授权:role_id,edit:编辑:id,del:禁用:id" />
+            </div>
+            <!--  分页显示区域 -->
+            <div class="page">{$page}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hiddenft"></div>
+</div>
+
+
+</body>
+</html>

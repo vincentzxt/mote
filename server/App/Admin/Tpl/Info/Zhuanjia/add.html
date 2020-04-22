@@ -1,0 +1,67 @@
+<load href='__PUBLIC__/css/layout.css' />
+<div id="main" class="main" >
+  <div class="content">
+    <div class="title">添加数据 [ <a href="__URL__">返回列表</a> ]</div>
+    <div id="result" class="result none"></div>
+    <load href='__PUBLIC__/css/layout.css' />
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/insert" enctype="multipart/form-data">
+  <input type="hidden" name="uid" value="{$sess.uid}">
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+
+  <tr>
+    <td class="tRight">专家姓名：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="name"></td>
+  </tr>
+  <tr>
+    <td class="tRight">专家头像：</td>
+    <td class="tLeft" ><input type="file" class="huge " name="imgFile"></td>
+  </tr>
+  <tr>
+    <td class="tRight">专家简介：</td>
+    <td class="tLeft" ><textarea name="jianjie" cols="47" rows="5"></textarea></td>
+  </tr>
+  <tr>
+    <td class="tRight">经验：</td>
+    <td class="tLeft" ><textarea name="rongyu" cols="47" rows="5"></textarea>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="tRight" >擅长：</td>
+    <td class="tLeft" ><textarea name="zhicheng" cols="47" rows="5"></textarea>
+    </td>
+  </tr>
+      <tr>
+          <td class="tRight">专家职称：</td>
+          <td class="tLeft" ><input type="text" class="huge " name="zhiwei" value=""></td>
+      </tr>
+  <tr>
+    <td class="tRight">其他：</td>
+    <td class="tLeft" ><textarea name="qita" cols="47" rows="5"></textarea></td>
+  </tr>
+      <tr>
+          <td class="tRight">排序：</td>
+          <td class="tLeft" ><input type="text" class="huge" name="order" value=""></td>
+      </tr>
+      <tr>
+          <td class="tRight">状态：</td>
+          <td class="tLeft" ><select name="status">
+              <option value="1">审核通过</option>
+              <option value="2">等待审核</option>
+          </select>
+              &nbsp;&nbsp;默认审核通过</td>
+      </tr>
+  <tr>
+    <td></td>
+    <td class="center"><div style="width:85%;margin:5px">
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+        <input type="submit" value="保 存"  class="button small">
+        <input type="reset" class="button small" onclick="resetEditor()" value="重 置" >
+      </div></td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

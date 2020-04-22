@@ -1,0 +1,85 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/lhgdialog/lhgdialog.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript">
+function confirmfunc(){	
+	if(window.confirm('你确定要提交吗？')){
+         //alert("确定");
+         return true;
+    }else{
+         //alert("取消");
+         return false;
+    }	
+}
+</script>
+<style>
+
+input.huge0{ width:50px; margin-left:5px; margin-right:9px;}
+input.huge{ width:100px; margin-top:5px; margin-bottom:5px;}
+input.huge1{ width:175px;}
+</style>
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/update" onSubmit="return confirmfunc();" enctype="multipart/form-data">
+  <input type="hidden" name="uid" value="{$sess.uid}">
+ 
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+ 
+  <input type="hidden" name="id" value="{$vo.id}" />
+ 
+   <tr>
+    <td class="tRight">模板名称：</td>
+    <td class="tLeft" ><input type="text" class="huge " name="title" value="{$vo.title}">
+     </td>
+  </tr>
+    <tr>
+    <td class="tRight">模板描述：</td>
+    <td class="tLeft" ><textarea name="content" cols="30" rows="3">{$vo.content}</textarea>
+     </td>
+  </tr>
+ 
+  <tr>
+    <td class="tRight">道具选择：</td>
+    <td class="tLeft" >
+    <input name="isShop" type="radio" value="1" <eq name="vo.isShop" value="1" >checked</eq> >开
+        <input name="isShop" type="radio" value="0" <eq name="vo.isShop" value="0" >checked</eq>>关</td>
+  </tr>
+  
+  <tr>
+    <td class="tRight">其他字段数组：</td>
+    <td class="tLeft" ><textarea name="paragm" cols="40" rows="8">{$vo.paragm}</textarea> 格式：字段名称 字段说明
+     </td>
+  </tr>
+ 
+   <tr>
+                    <td style="text-align:right;" >状态：</td>
+                    <td style="text-align:left; padding-left:10px;" ><select name="status">
+                        <option value="1" 
+                        <eq name="vo.status" value="1" >selected</eq>
+                        >开启
+                        </option>
+                        <option value="0" 
+                        <eq name="vo.status" value="0" >selected</eq>
+                        >关闭
+                        </option>
+                      </select></td>
+                  </tr>
+ 
+  
+    <td></td>
+    <td class="center">
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+        <input type="submit" value="保 存"  class="button small" style="width:50px">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" class="button small" onClick="resetEditor()" style="width:50px" value="重 置" >
+      </td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

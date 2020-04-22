@@ -1,0 +1,43 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<load href='__PUBLIC__/js/jquery-1.8.3.min.js' />
+
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/saveNotice" enctype="multipart/form-data">
+  <input type="hidden" name="uid" value="{$sess.uid}">
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+  <tr>
+    <td class="tRight">选择游戏服务器组：</td>
+    <td class="tLeft" >
+    	<select name="server">
+        <option value="0" class="0">请选择</option>
+        <volist name="ServerGroup" id="ServerGroup">
+          <option value="{$ServerGroup.gname}-{$ServerGroup.gname}" class="{$ServerGroup.gid}">
+          {$ServerGroup.aid|toagame} - {$ServerGroup.gname}  >>>>平台：{$ServerGroup.pid|togameland}</option>
+        </volist>
+      </select>
+    </td>
+  </tr> 
+   <tr>
+    <td class="tRight">游戏公告：</td>
+    <td class="tLeft" ><textarea name="notice" cols="70" rows="10">{$buffer}</textarea>
+      &nbsp;&nbsp;输入新公告内容</td>
+  </tr>
+ 
+  
+    <td></td>
+    <td class="center">
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+        <input type="submit" value="保 存"  class="button small" style="width:50px">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" class="button small" onClick="resetEditor()" style="width:50px" value="重 置" >
+      </td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

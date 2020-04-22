@@ -1,0 +1,100 @@
+<!DOCTYPE>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script language="javascript">
+    //获得选中项的索引   
+	function ab(){
+      var a = $("select option:selected").attr('class');
+	  alert(a);
+	  document.getElementById("level").value = parseInt(a) + 1;
+	}
+</script>
+</head>
+
+<body>
+<div id="doc">
+      <!--head开始-->
+      
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+        
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+            <ul class="tab_title">
+                <li><a href="__URL__/index">数据栏目管理</a></li>
+            	<li  class="on"><a href="__APP__/Data/DataAuthority/add">添加栏目</a></li>
+            </ul>
+          	<div class="mod-header radius clearfix"><h2>添加栏目</h2></div>
+            <div class="mod-body">
+            	<div class="content register_content_center">
+                    <form method='post' action="__URL__/Insert">
+                    	<table cellpadding=3 cellspacing=3>
+                        	<tr>
+                            	<td class="tRight">分类名称：</td>
+                                <td class="tLeft"><input type="text" name="title" value="" /></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight">分类描述：</td>
+                                <td class="tLeft"><input type="text" name="rename" value="" /></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight">上级分类：</td>
+                                <td class="tLeft">
+                                	<label for="ParentId"></label>
+                                    <select name="pid" id="sle" onChange="ab()">
+                                      <option value="0" class="0">根目录</option>
+                                       <volist name="sct" id="data">
+                                        <option value="{$data[0]}" class="{$data[5]}">{$data[3]}</option>
+                                       </volist>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight"></td>
+                                <td class="tLeft"><input type="hidden" name="level" value="1" id="level"></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight">状态：</td>
+                                <td class="tLeft">
+                                	<select name="status">
+                                      <option value="1" selected="selected">开启</option>
+                                      <option value="0">关闭</option>
+                                    </select>
+                                </td>
+                            </tr>
+                         <!--    <tr>
+                            	<td class="tRight">操作地址（相对于BI路径）：</td>
+                                <td class="tLeft"><input name="url" type="text"   value="" /> 比如  KPI/AU</td>
+                            </tr>-->
+                            <tr>
+                            	<td class="tRight">排序：</td>
+                                <td class="tLeft"><input name="sort" type="text"   value="1" /></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight"></td>
+                                <td class="tLeft"><input type="submit" value="提交" class="imgButton" /></td>
+                            </tr>
+                            <tr>
+                            	<td class="tRight"></td>
+                                <td class="tLeft"><a href="__ROOT__/admin.php/Category/Index?c={$c}">返回列表</a></td>
+                            </tr>
+                        </table>
+                    </form>
+                    
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+     
+    </div>
+
+
+</body>
+</html>

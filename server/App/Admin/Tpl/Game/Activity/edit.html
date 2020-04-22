@@ -1,0 +1,203 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/lhgdialog/lhgdialog.min.js"></script>
+<script language="javascript" type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+  // 在这里写你的代码...
+  $('#count').val(0);
+});
+
+function confirmfunc(){	
+	if(window.confirm('你确定要提交吗？')){
+         //alert("确定");
+         return true;
+    }else{
+         //alert("取消");
+         return false;
+    }	
+}
+
+function opdg(i)
+{
+    $.dialog({ 
+	 title: "商品道具选择",
+	 width: 450,
+     height: 350,
+     content: 'url:__URL__/selectShop/input/'+i,
+     lock:true
+	
+	});
+}
+//flag 为1 删除所有已有列表
+function chgmb(flag){
+	var id = $('#muban').val();
+	var inp = $('#count').val();	
+	//alert('flag:'+flag);
+	if(flag){
+		$('#count').val(0);	
+		$('#hdlist table').remove();
+	}
+	//alert(id);
+	$.ajax({
+	   type: "POST",
+	   url: "__URL__/chgmuban",
+	   data: "id="+id+'&inp='+inp,
+	   success: function(msg){		   
+		   $('#hdlist').append(msg);
+		  // alert( "Data Saved: " + msg );
+	   }
+	});
+}
+
+function addSomething(){
+	var html = $('#activityconfig').val();
+	if(html){
+		$('#hdlist table').remove();	
+	}
+	//初始化
+	chgmb(0);
+	var val = $('#count').val();
+	val = val - 0 + 1;
+	$('#count').val(val);
+}
+
+function getAll_shopid(q){
+	//alert(q);
+	var s = [];
+	$('#djlist' + q + ' input[name="'+ q +'_item_id[]"]').each(function(){
+	   	s.push($(this).val());
+	});
+	jQuery.unique(s);
+	idsarray = s;
+	//alert(idsarray);
+}	
+
+var idsarray = new Array();   
+
+function addShop(a,b,i,inp){
+	  var id = i;
+      var html = '  <tr id="Shop'+ inp + id +'">';
+		  html += '<td>'+ id +'</td>';
+ 		  html += ' <td><input name="'+ inp +'_item_id[]" type="text" style="width:100px;" value="'+ a +'" readonly></td>';
+  		  html += ' <td><input name="'+ inp +'_item_name[]" type="text" style="width:100px;" value="'+ b +'" readonly></td>';
+  		  html += ' <td><input name="'+ inp +'_item_number[]" type="text" style="width:50px;" value="1"></td>';		
+		  html += '  <td><input type="button" value="删除" onclick="delShop('+ id +','+ inp +');" /></td>';	
+          html += ' </tr>';	
+		  
+		  $("#djlist"+inp).append(html);
+	      $("#flag"+inp).val(id+1);
+}
+function delShop(i,q){
+	$("#Shop"+q+i).remove();
+}
+
+function deldj(i){
+    $('#dj'+i).remove();	
+}
+</script>
+<style>
+
+input.huge0{ width:50px; margin-left:5px; margin-right:9px;}
+input.huge{ width:100px; margin-top:5px; margin-bottom:5px;}
+input.huge1{ width:175px;}
+</style>
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/saveActivity" onSubmit="return confirmfunc();" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$vo.id}">
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+  <tr>
+    <td class="tRight">活动ID：</td>
+    <td class="tLeft" ><input type="text" class="huge " name="active_id" value="{$vo.activityid}"></td>
+  </tr>
+  <tr>
+    <td class="tRight">活动名称：</td>
+    <td class="tLeft" ><input type="text" class="huge " style="width:200px;" name="active_name" value="{$vo.activityname}" /></td>
+  </tr>
+  <tr>
+    <td class="tRight">活动开关：</td>
+    <td class="tLeft" ><input name="isStart" type="radio" value="1"
+    	<eq name="$vo.open" value="1">checked</eq>
+     onChange="chgInputJM()">
+      开
+      <input name="isStart" type="radio" value="0"
+      <eq name="$vo.open" value="0">checked</eq>
+       checked onChange="chgInputJM()">
+      关</td>
+  </tr>
+  <tr id="oneid">
+    <td class="tRight">时间开放类型：</td>
+    <td class="tLeft" ><select name="timeType">
+        <volist name="str0" id="vo0"> 
+        <option value="{$vo0.Id}" 
+          <eq name="$vo0.Id" value="$vo.timetype">selected</eq>
+          >{$vo0.Name}
+          </option>
+        </volist>
+      </select></td>
+  </tr>
+  <tr id="arrayid">
+    <td class="tRight">时间区间：</td>
+    <td class="tLeft" ><input type="text" class="Wdate "  style="width:150px;" name="date[]" id="start"  value="{$vo['timeparam'][0]}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+      <input type="text" class="Wdate "  style="width:150px;" name="date[]" id="stop"  value="{$vo['timeparam'][1]}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" /></td>
+  </tr>
+  <tr>
+    <td class="tRight">活动期数：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="active_number" id="active_number" value="{$vo.termid}"></td>
+  </tr>
+  <tr>
+    <td class="tRight">展示时间：</td>
+    <td class="tLeft" ><input type="text" class="Wdate"  style="width:100px;"  name="showtime" id="showtime" value="{$vo.showtime}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  />
+      &nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">活动模板
+      <select name="muban" id="muban" onChange="chgmb(1);">
+        <volist name="mbconfig" id="mbconfig"> <option value="{$mbconfig.id}" attr1="{$mbconfig.mbarray.0}"
+              
+          <eq name="mbconfig.id" value="$vo.id" >selected</eq>
+          >{$mbconfig.title}
+                    
+          </option>
+        </volist>
+      </select></td>
+  </tr>
+  <tr>
+    <td colspan="2">活动详情：
+      <input type="button" name="button1" value="点击》添加活动" onClick="addSomething();" />
+    	
+      <input type="hidden" name="count" id="count" value="0" /></td>
+  </tr>
+  <TR>
+    <td colspan="2" id="hdlist">
+    	<table border="1" cellspacing="1" cellpadding="1">
+        <tr>
+    <td>参数详情：</td>
+  </tr>
+  <tr>
+    <td><textarea  cols="35" rows="5" id="activityconfig" name="activityconfig">{$vo.activityconfig}</textarea></td>
+  </tr>
+  <tr>
+    <td style="color:red">如需更改请直接添加即可</td>
+  </tr>
+</table>
+
+    </td>
+  </TR>
+  
+    <td></td>
+    <td class="center"><input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+      <input type="submit" value="保 存"  class="button small" style="width:50px">
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="reset" class="button small" onClick="resetEditor()" style="width:50px" value="重 置" ></td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

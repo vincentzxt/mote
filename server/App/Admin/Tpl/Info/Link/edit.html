@@ -1,0 +1,86 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+  <div class="content">
+    <div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+    <div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<tagLib name="html" />
+<script type="text/javascript">
+function add(){
+    window.location = "__URL__/add";	
+}
+function edit(x){
+	window.location = "__URL__/edit/{$x}/" + x;
+}
+function del(x){
+	window.location =  "__URL__/delonepage/{$x}/" + x;
+}
+</script>
+<div class="content" >
+<!--  功能操作区域  -->
+<div class="operate" >
+
+<!-- 查询区域 -->
+<div class="fRig">
+
+</div>
+<!-- 功能操作区域结束 -->
+
+<!-- 列表显示区域  -->
+<div class="list" >
+  <form method='post' id="form1" name="form1" action="__URL__/update"  enctype="multipart/form-data">
+<input type="hidden" name="id" value="{$vo.id}">
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+  <tr>
+    <td width="122">链接名称：</td>
+    <td width="651">
+      <input name="name" type="text" size="35" value="{$vo.name}"></td>
+  </tr>
+  <tr>
+    <td>显示名称：</td>
+    <td><input name="title" type="text" size="50" value="{$vo.title}"></td>
+  </tr>
+  <tr>
+    <td>链接地址：</td>
+    <td><input name="url" type="text" size="50" value="{$vo.url}"></td>
+  </tr>
+  <tr>
+    <td width="122">图片URL：</td>
+    <td width="651">   <if condition="$vo.pic neq ''"><img src="/{$vo.pic}" width="100" height="100" > </if>
+
+      <input type="file" class="huge" name="imgFile"></td>
+  </tr>
+    <tr>
+      <td>排序：</td>
+      <td><input name="order" type="text" size="50" value="{$vo.order}"></td>
+    </tr>
+    <tr>
+    <td>启用：</td>
+    <td>  <select name="status">
+      <option value="1" 
+      <if condition="$vo.status eq 1">selected="selected"</if>
+      >启用</option>
+      <option value="0"
+      <if condition="$vo.status eq 0">selected="selected"</if>
+      >不启用</option>
+    </select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="提交"></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+</div>
+<!--  分页显示区域 -->
+
+<!-- 列表显示区域结束 -->
+</div>
+<!-- 主体内容结束 -->
+</div>
+<!-- 主页面结束 -->
+

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+<title>{$title}</title>
+
+<meta name="csrf-param" content="authenticity_token">
+
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script language="javascript">
+function add(){
+    window.location = "__URL__/add";	
+}
+function edit(x){
+	window.location = "__URL__/edit/{$x}/" + x;
+}
+function del(x){
+	window.location =  "__URL__/delD/{$x}/" + x;
+}
+</script>
+</head>
+<body>
+<div id="doc"> 
+  <!--head开始--> 
+  
+  <!--head结束-->
+  <div class="bd clearfix"> 
+    <!--左侧开始--> 
+    
+    <!--左侧结束-->
+    <div id="mainContainer">
+      <div class="mod mod1">
+        <ul class="tab_title">
+          <li class="on"><a href="__URL__/index">通知管理</a></li>
+          <li><a href="__URL__/add">添加通知</a></li>
+        </ul>
+        <div class="mod-header radius clearfix">
+          <h2>用户组管理</h2>
+        </div>
+        <div class="mod-body mod-body-ie8">
+          <div class="content">
+          <form method='post' action="__URL__">
+              <input type="text" name="name" title="组名" class="medium" >
+              <input type="submit" value="搜索" />
+          </form>
+          <html:imageBtn name="add" value="新增" click="add()" style="impBtn hMargin fLeft shadow" />
+          <html:imageBtn name="edit" value="编辑" click="edit()" style="impBtn hMargin fLeft shadow" />
+          <html:imageBtn name="delete" value="删除" click="foreverdel()" style="impBtn hMargin fLeft shadow" />
+          <!-- 列表显示区域  -->
+          <tagLib name="html" />
+          <div class="list" >
+            <div id="result" class="result none"></div>
+            <html:list id="checkList" name="user" style="list" checkbox="true" action="true" datasource="list" show="id:编号|8%,fgs_id|toCompany:分公司,tid|getname:通知分类,title:标题:edit,time|toDate='y-m-d':发表时间,flag|getStatus:状态" actionlist="status|showStatus=$user['id'],edit:编辑:id,del:删除:id" />
+          </div>
+          <!--  分页显示区域 -->
+          <div class="page">{$page}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hiddenft"></div>
+</div>
+</body>
+</html>

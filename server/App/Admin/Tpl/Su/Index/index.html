@@ -1,0 +1,733 @@
+<!doctype html>
+<html>
+<head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+  <title>{$title}</title>
+  
+ <meta http-equiv="Cache-Control" content="max-age=7200" />
+
+  <link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+  
+  <!-- 放在头部 避免ie8的bug-->
+  <!--[if IE >
+    <script src="js/cached_report_lay_head.js" type="text/javascript"></script>
+    <![endif] --> 
+  </head>
+  <body class="report">
+    <div class="hellobar" id="hellobar" style="display:none">
+      <span>
+      </span>
+      <a class="close-notify"><img class="hellobar-up-arrow" src="__PUBLIC__/images/hellobar2-up-arrow.png"></a>
+    </div>
+    <div class="hellobar-stub" style="display:none">
+      <a class="show-notify"><img class="hellobar-down-arrow" src="__PUBLIC__/images/hellobar2-down-arrow.png"></a>
+    </div>
+    <div id="doc">
+      <!--head开始-->
+  
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+  
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="contentCol">
+            <input value="index" id="action_stats" type="hidden">
+<div class="mod mod1" id="today_table">
+	<div class="mod-header radius">
+    <h2>今日数据<a class="icon help poptips" action-frame="tip_todayData" title=""></a>&nbsp;&nbsp;
+    </h2>
+	</div>
+  <div class="mod-body " id="data-load">
+  <table class="data-load " border="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+          <th></th>
+          <th>新增用户</th>
+          <th>活跃用户</th>
+          <th>新增用户比例</th>
+          <th>启动次数</th>
+          <th>平均单次使用时长</th>
+      </tr>
+    </thead>
+    <tbody id="data-list">
+    <tr><td>今日</td><td>1247</td><td>64767</td><td>1%</td><td>109680</td><td>00:01:10</td></tr><tr><td>昨日</td><td>3316</td><td>97935</td><td>3%</td><td>197786</td><td>00:01:16</td></tr><tr><td>今日预测</td><td class="desc">2926</td><td class="asc">106809</td><td class="desc">2%</td><td class="desc">185287</td><td class="desc">00:01:09</td></tr></tbody>
+  </table>
+  <div style="display: none;" class="wait-load"><img src="__PUBLIC__/images/ajax-loader.gif"></div>
+</div>
+
+
+</div>
+<div class="mod mod1">
+	<div class="mod-header radius clearfix">
+		<h2>时段分析<a class="icon help poptips" action-frame="tip_periodAna" title=""></a></h2>
+		<div class="option option_index">
+			<span class="icon export" id="export_hours" title="导出"></span>
+		</div>
+	</div>
+	<div class="mod-body">
+		<div class="content">
+			<div class="tabpanel">
+				<ul id="today_tabpanel_items" class="borders">
+				<li particle="install" flag="true" class="on">新增用户</li><li particle="launches" flag="true" class="">启动次数</li></ul>
+			</div>
+			<div class="chartpanel">
+				<div data-highcharts-chart="3" id="today_chartcontainer" style="min-width: 400px; height: 300px; margin: 0 auto"><div style="position: relative; overflow: hidden; width: 1601px; height: 300px; text-align: left; line-height: normal; z-index: 0; font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Verdana,Arial,Helvetica,sans-serif; font-size: 12px; left: 0px; top: 0px;" id="highcharts-9" class="highcharts-container"></div></div>
+			</div>
+			<div class="contrastpanel">
+				<a href="#" class="constr borders" id="daily_constr_date">对比时段</a>
+				<div id="today_constr_date_popform" class="mod singledate" style="display: none;">
+					<div class="mod-body"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="mod mod1">
+	<div class="mod-header radius clearfix">
+		<h2>整体趋势<a class="icon help poptips" action-frame="tip_appTrend" title=""></a></h2>
+		<div class="option">
+			<div class="particle particle_right">
+				<ul id="trends_period"><li particle="-7" flag="true" class="">过去7天</li><li particle="-30" flag="true" class="on">过去30天</li><li particle="-90" flag="true" class="">过去90天</li></ul>
+			</div>
+		</div>
+	</div>
+	<div class="mod-body">
+		<div class="content">
+			<div class="tabpanel">
+				<ul id="trends_tabpanel_items" class="borders">
+				<li particle="installation" flag="true" class="on">新增用户</li><li particle="accumulation" flag="true" class="">累计用户</li><li particle="activeUser" flag="true" class="">活跃用户</li><li particle="installationRate" flag="true" class="">活跃用户构成</li><li particle="launch" flag="true" class="">启动次数</li><li particle="avgDuration" flag="true" class="">平均单次使用时长</li></ul>
+			</div>
+			<div class="chartpanel">
+				<div data-highcharts-chart="1" id="trends_chartcontainer" style="min-width: 400px; height: 300px; margin: 0 auto"><div style="position: relative; overflow: hidden; width: 1601px; height: 300px; text-align: left; line-height: normal; z-index: 0; font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Verdana,Arial,Helvetica,sans-serif; font-size: 12px; left: 0px; top: 0px;" id="highcharts-3" class="highcharts-container"></div></div>
+			</div>
+		</div>
+	</div>
+	<div class="mod-bottom">
+		<div class="hidden" id="totalDetails">
+			<div class="mod parent-table">
+				<div class="mod-header" style="border-top:0px">
+					<h2>整体趋势数据明细<a class="icon help poptips" action-frame="tip_appTrend" title=""></a></h2>
+					<div class="option">
+						<span class="icon export" id="export_trends"></span>
+					</div>
+				</div>
+				<div class="mod-body " id="data-load">
+  <table class="data-load " border="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+          <th>日期</th>
+          <th>新增用户</th>
+          <th>累计用户</th>
+          <th>活跃用户</th>
+          <th>活跃用户构成</th>
+          <th>启动次数</th>
+          <th>平均单次使用时长</th>
+      </tr>
+    </thead>
+    <tbody id="data-list">
+    <tr><td>06-03</td><td>1247</td><td>1357046</td><td>64767</td><td>1.9%</td><td>109680</td><td>00:01:10</td></tr><tr><td>06-02</td><td>3316</td><td>1355799</td><td>97935</td><td>3.4%</td><td>197786</td><td>00:01:16</td></tr><tr><td>06-01</td><td>3174</td><td>1352483</td><td>95902</td><td>3.3%</td><td>193438</td><td>00:01:13</td></tr><tr><td>05-31</td><td>3021</td><td>1349309</td><td>96419</td><td>3.1%</td><td>193739</td><td>00:01:13</td></tr><tr><td>05-30</td><td>3099</td><td>1346288</td><td>98166</td><td>3.2%</td><td>200157</td><td>00:01:13</td></tr><tr><td>05-29</td><td>3325</td><td>1343189</td><td>97586</td><td>3.4%</td><td>200119</td><td>00:01:13</td></tr><tr><td>05-28</td><td>3459</td><td>1339864</td><td>98275</td><td>3.5%</td><td>200724</td><td>00:01:14</td></tr><tr><td>05-27</td><td>3495</td><td>1336405</td><td>98529</td><td>3.5%</td><td>202484</td><td>00:01:15</td></tr><tr><td>05-26</td><td>3766</td><td>1332910</td><td>98848</td><td>3.8%</td><td>202308</td><td>00:01:16</td></tr><tr><td>05-25</td><td>3625</td><td>1329144</td><td>98144</td><td>3.7%</td><td>196149</td><td>00:01:15</td></tr><tr><td>05-24</td><td>3980</td><td>1325519</td><td>99013</td><td>4%</td><td>203888</td><td>00:01:15</td></tr><tr><td>05-23</td><td>9081</td><td>1321539</td><td>102134</td><td>8.9%</td><td>219083</td><td>00:01:15</td></tr><tr><td>05-22</td><td>3105</td><td>1312458</td><td>95589</td><td>3.2%</td><td>195260</td><td>00:01:13</td></tr><tr><td>05-21</td><td>3036</td><td>1309353</td><td>95634</td><td>3.2%</td><td>192842</td><td>00:01:13</td></tr><tr><td>05-20</td><td>3051</td><td>1306317</td><td>95888</td><td>3.2%</td><td>196755</td><td>00:01:13</td></tr><tr><td>05-19</td><td>3530</td><td>1303266</td><td>95977</td><td>3.7%</td><td>193727</td><td>00:01:14</td></tr><tr><td>05-18</td><td>3329</td><td>1299736</td><td>94864</td><td>3.5%</td><td>189998</td><td>00:01:13</td></tr><tr><td>05-17</td><td>3167</td><td>1296407</td><td>95536</td><td>3.3%</td><td>193639</td><td>00:01:15</td></tr><tr><td>05-16</td><td>3366</td><td>1293240</td><td>96615</td><td>3.5%</td><td>198570</td><td>00:01:13</td></tr><tr><td>05-15</td><td>3312</td><td>1289874</td><td>96833</td><td>3.4%</td><td>198109</td><td>00:01:14</td></tr></tbody>
+  </table>
+  <div style="display: none;" class="wait-load"><img src="__PUBLIC__/images/ajax-loader.gif"></div>
+</div>
+<div style="margin-bottom: 10px; display: block;" class="mod-bottom clearfix">
+    <div class="fr pagination"><span class="current prev">上一页</span><span class="current">1</span><a href="###">2</a><a class="next" href="###">下一页</a></div>
+</div>
+
+
+			</div>
+		</div>
+		<div class="mod mod1 showdetails" style="*position:static;"><a href="#" class="expandCollapse" expand-id="totalDetails">展开明细数据</a></div>
+	</div>
+</div>
+<div class="fix-column clearfix" m="15">
+	<div style="width: 817px; margin-right: 15px;" class="col">
+		<div class="mod mod1" id="scale_table">
+			<div class="mod-header radius">
+				<h2>应用规模<a class="icon help poptips" action-frame="tip_appScale" title=""></a></h2>
+			</div>
+      <div class="mod-body " id="data-load">
+  <table class="data-load " border="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody id="data-list">
+    <tr><td>累计用户</td><td>1357461</td></tr><tr><td>过去7天活跃用户 (%)</td><td>216895 (16.0%)</td></tr><tr><td>过去30天活跃用户 (%)</td><td>384027 (28.3%)</td></tr></tbody>
+  </table>
+  <div style="display: none;" class="wait-load"><img src="__PUBLIC__/images/ajax-loader.gif"></div>
+</div>
+
+
+		</div>
+	</div>
+	<div style="width: 817px; margin-right: 0px;" class="col">
+		<div class="mod mod1" id="summary_table">
+			<div class="mod-header radius">
+				<h2>使用摘要<a class="icon help poptips" action-frame="tip_useSum" title=""></a></h2>
+			</div>
+      <div class="mod-body " id="data-load">
+  <table class="data-load " border="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody id="data-list">
+    <tr><td>累计启动(人均)</td><td>44876255 (33)</td></tr><tr><td>过去7天平均单次使用时长</td><td>00:01:13</td></tr><tr><td>过去7天平均日使用时长</td><td>00:02:22</td></tr></tbody>
+  </table>
+  <div style="display: none;" class="wait-load"><img src="__PUBLIC__/images/ajax-loader.gif"></div>
+</div>
+
+
+		</div>
+	</div>
+</div>
+
+<div class="mod mod1">
+	<div class="mod-header radius clearfix">
+		<h2>Top 版本<a class="icon help poptips" action-frame="tip_top10Ver" title=""></a></h2>
+		<div class="option">
+      <a href="#">详情</a>
+		</div>
+	</div>
+	<div class="mod-body">
+		<div class="content">
+      <div class="tabpanel">
+        <ul id="top10_version_tabpanel" ,="" class="borders">
+        <li particle="install" flag="true" class="on">新增用户</li><li particle="active" flag="true" class="">活跃用户</li><li particle="add_up" flag="true" class="">累计用户</li></ul>
+      </div>
+			<div class="chartpanel">
+				<div data-highcharts-chart="0" id="version_chartcontainer" style="min-width: 400px; height: 400px; margin: 0 auto"><div style="position: relative; overflow: hidden; width: 1601px; height: 400px; text-align: left; line-height: normal; z-index: 0; font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Verdana,Arial,Helvetica,sans-serif; font-size: 12px; left: 0px; top: 0px;" id="highcharts-0" class="highcharts-container"></div></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="mod mod1">
+	<div class="mod-header radius clearfix">
+		<h2>Top 渠道<a class="icon help poptips" action-frame="tip_top10Chan" title=""></a></h2>
+		<div class="option">
+			<a href="#">详情</a>
+		</div>
+	</div>
+	<div class="mod-body">
+		<div class="content">
+      <div class="tabpanel">
+        <ul id="top10_channel_tabpanel" ,="" class="borders">
+        <li particle="install" flag="true" class="on">新增用户</li><li particle="active" flag="true" class="">活跃用户</li><li particle="add_up" flag="true" class="">累计用户</li></ul>
+      </div>
+			<div class="chartpanel">
+				<div data-highcharts-chart="2" id="channel_chartcontainer" style="min-width: 400px; height: 400px; margin: 0 auto"><div style="position: relative; overflow: hidden; width: 1601px; height: 400px; text-align: left; line-height: normal; z-index: 0; font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Verdana,Arial,Helvetica,sans-serif; font-size: 12px; left: 0px; top: 0px;" id="highcharts-6" class="highcharts-container"></div></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <a class="icon help poptips" action-frame="tipdemo" title="poptip"></a> -->
+<div class="">
+  <div id="tip_app_dashboard">
+    <div id="tip_todayData" class="tips">
+      <div class="corner"></div>
+      <p><span class="highlight">新增用户：</span>第一次启动应用的用户（以设备为判断标准）</p>
+      <p><span class="highlight">活跃用户：</span>启动过应用的用户（去重），启动过一次的用户即视为活跃用户，包括新用户与老用户</p>
+      <p><span class="highlight">新增用户比例：</span>新增用户占活跃用户的比例，即新增用户/活跃用户</p>
+      <p><span class="highlight">启动次数：</span>
+        			在iOS4.x之后的系统，由于iOS开始支持后台运行，进入后台即算是当前统计会话结束。当再次进入前台时，算作一次新的启动行为，并开始新的统计会话。
+      </p>
+      <p><span class="highlight">平均单次使用时长：</span>单次使用时长的均值，即应用的总使用时长/总启动次数</p>
+    </div>
+    <div id="tip_periodAna" class="tips">
+      <div class="corner"></div>
+      <p class="margin-bottom">提供了0-24时各时段内新增用户与启动次数的数据，帮您分析用户使用应用的时段规律。</p>
+      <p><span class="highlight">新增用户：</span>第一次启动应用的用户（以设备为判断标准）</p>
+      <p><span class="highlight">启动次数：</span>
+        			在iOS4.x之后的系统，由于iOS开始支持后台运行，进入后台即算是当前统计会话结束。当再次进入前台时，算作一次新的启动行为，并开始新的统计会话。
+      </p>
+    </div>
+    <div id="tip_appTrend" class="tips">
+      <div class="corner"></div>
+      <p class="margin-bottom">展示了应用在一段时期内的变化趋势，方便您跟踪和评估应用的运营状况。</p>
+      <p><span class="highlight">新增用户：</span>第一次启动应用的用户（以设备为判断标准）</p>
+      <p><span class="highlight">活跃用户：</span>启动过应用的用户（去重），启动过一次的用户即视为活跃用户，包括新用户与老用户</p>
+      <p><span class="highlight">活跃用户构成：</span>每日活跃用户中新用户与老用户的分布</p>
+      <p><span class="highlight">启动次数：</span>
+        			在iOS4.x之后的系统，由于iOS开始支持后台运行，进入后台即算是当前统计会话结束。当再次进入前台时，算作一次新的启动行为，并开始新的统计会话。
+      </p>
+      <p><span class="highlight">平均单次使用时长：</span>单次使用时长的均值，即应用的总使用时长/总启动次数
+      </p>
+    </div>
+    <div id="tip_appScale" class="tips">
+      <div class="corner"></div>
+      <p><span class="highlight">累计用户：</span>截止到现在，启动过应用的所有独立用户（去重，以设备为判断标准）</p>
+      <p><span class="highlight">过去7天活跃用户：</span>过去7天启动过应用的用户（去重），启动过一次的用户即视为活跃用户，包括新用户与老用户</p>
+      <p><span class="highlight">过去7天活跃占比：</span>过去7天的活跃用户占累计用户的比例</p>
+      <p><span class="highlight">过去30天活跃用户：</span>过去30天启动过应用的用户（去重），启动过一次的用户即视为活跃用户，包括新用户与老用户</p>
+      <p><span class="highlight">过去30天活跃占比：</span>过去30天的活跃用户占累计用户的比例</p>
+    </div>
+    <div id="tip_useSum" class="tips">
+      <div class="corner"></div>
+      <p><span class="highlight">累计启动(人均)：</span>截止到现在，应用的总启动次数（累计启动/累计用户）</p>
+      <p><span class="highlight">平均单次使用时长：</span>单次使用时长的均值，即应用的总使用时长/总启动次数</p>
+      <p><span class="highlight">平均日使用时长：</span>日使用时长的均值，即全部用户的日使用时长/总活跃用户</p>
+      <p>这里展示的是过去7天的平均单次使用时长的均值、过去7天的平均日使用时长的均值。</p>
+    </div>
+    <div id="tip_top10Ver" class="tips">
+      <div class="corner"></div>            <p>新增用户展示的是按今日新增排名Top5版本的今日与昨日用户新增情况。活跃用户展示的是按今日活跃排名的Top5版本的今日与昨日用户活跃情况。累计用户展示的是截至今日Top10版本的累计用户数。</p>
+      <p>通过详情可以跳转到版本分布页面。</p>
+    </div>
+    <div id="tip_top10Chan" class="tips">
+      <div class="corner"></div>            <p>新增用户展示的是按今日新增排名Top5渠道的今日与昨日用户新增情况。活跃用户展示的是按今日活跃排名的Top5渠道的今日与昨日用户活跃情况。累计用户展示的是截至今日Top10渠道的累计用户数。</p>
+      <p>通过详情可以跳转到渠道列表页面。</p>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+    </div>
+    <input name="umengAds" id="pos" value="1" type="hidden">
+<!--    
+    
+      <script type="text/javascript">
+  var umeng = {};
+  global.fixedStartDay = "2013-05-05";
+  global.fixedEndDay   = "2013-06-03"
+  $('#totalDetails .mod-bottom').addClass('clearfix').css('margin-bottom','10px');
+  renderTodayChart = function(date, is_compared,callback){
+    var stats  = $('#today_tabpanel_items').renderTab('get_status');
+    var url    = '/apps/' + global.appid + '/reports/';
+    var params = {
+      date: date,
+      time_unit:'hourly',
+      is_compared: is_compared,
+      stats: global.action_stats+'_hours_'+stats,
+    };
+    
+    render_chart('today_chartcontainer','',url+'load_chart_data',params,false,'',callback);
+  };
+
+  renderVersionChart = function(metric){
+    var url = '/apps/' + global.appid + '/reports/';
+    var params = {
+      metric: metric,
+      stats: global.action_stats+'_versions'
+    };
+
+    render_chart('version_chartcontainer', '', url+'load_chart_data', params, false,
+     {
+       chart: {type: 'bar'},
+       tooltip:{
+         formatter: function() { return this.x + ': ' + this.y; }
+       },
+       legend:{
+         reversed: true
+       },
+       plotOptions: { series: { pointWidth : 15} }
+     }
+    );
+  };
+
+  renderChannelChart = function(metric){
+    var url = '/apps/' + global.appid + '/reports/';
+    var params = {
+      metric: metric,
+      stats: global.action_stats+'_channels'
+    };
+
+    render_chart('channel_chartcontainer', '', url+'load_chart_data', params, false,
+     {
+       chart: {type: 'bar'},
+       tooltip:{
+         formatter: function() { return this.x + ': ' + this.y; }
+       },
+       legend:{
+         reversed: true
+       },
+       plotOptions: { series: { pointWidth : 15} }
+     }
+    );
+  };
+
+  renderTrendsChart = function() {
+    var url = '/apps/' + global.appid + '/reports/';
+    var stats = $('#trends_tabpanel_items').renderTab('get_status');
+    var params = {
+      start_date : global.fixedStartDay,
+      end_date   : global.fixedEndDay,
+      stats: global.action_stats+'_'+stats
+    };
+
+    render_chart('trends_chartcontainer', '', url+'load_chart_data', params, false);
+  }
+
+  renderTrendsTable = function() {
+    var url = '/apps/' + global.appid + '/reports/';
+    var params = {
+      start_date : global.fixedStartDay,
+      end_date   : global.fixedEndDay,
+      stats      : global.action_stats + "_details",
+    };
+
+    $('.parent-table').renderTable({
+      url: url + 'load_table_data',
+      params: params,
+          temp: '<tr><td>${date}</td><td>${install_data}</td><td>${accumulations}</td><td>${active_data}</td><td>${install_rate}%</td><td>${launch_data}</td><td>${duration_data}</td></tr>'
+    });
+  };
+
+  renderTodayTable = function() {
+    var url = '/apps/' + global.appid + '/reports/';
+    var params = {
+      stats : 'index_today'
+    };
+
+    $('#today_table').renderTable({
+      url: url + 'load_table_data',
+      params: params,
+      temp: '<tr><td>${date}</td><td>${install}</td><td>${active}</td><td>${rate}</td><td>${launch}</td><td>${average}</td></tr>',
+      callback:function(inst,param){
+        var tds = $('#today_table table tbody tr:last-child td');
+        var nums = param.stats[2].forecast;
+        for(i=1;i<tds.length;i++){
+          tds.eq(i).addClass(nums[i-1]);
+        }
+      }
+    });
+  }
+
+  renderScaleTable = function() {
+    var url = '/apps/' + global.appid + '/reports/';
+    var params = {
+      stats : 'index_scale'
+    };
+
+    $('#scale_table').renderTable({
+      url: url + 'load_table_data',
+      params: params,
+      temp: '<tr><td>${date}</td><td>${data}</td></tr>'
+    });
+  }
+
+  renderSummaryTable = function() {
+    var url = '/apps/' + global.appid + '/reports/';
+    var params = {
+      stats : 'index_summary'
+    };
+
+    $('#summary_table').renderTable({
+      url: url + 'load_table_data',
+      params: params,
+      temp: '<tr><td>${date}</td><td>${data}</td></tr>'
+    });
+  };
+
+  $(document).ready(function(){
+    renderTodayTable();
+
+    $('#today_tabpanel_items').renderTab({
+      data:[
+        { name: "新增用户", particle: "install", flag: "true" },
+        { name: "启动次数", particle: "launches", flag: "true" }
+      ],
+      default_type: "install",
+      callback: function(tar, attr, index, txt){
+        renderTodayChart("2013-06-03", false, function(){
+          var glo = global.contrast.length;
+          var ser = umeng.ccd.getData('today_chartcontainer').slice(4);
+          if(glo > ser.length){
+            for(i=ser.length;i<glo;i++){
+              renderTodayChart(global.contrast[i],true);
+            }
+          }
+        });
+      }
+    });
+    umeng.ccd = new cacheChartData('today_chartcontainer');
+    //add contrast daily date
+    $('#daily_constr_date').click(function(){
+      var panel =  $('#today_constr_date_popform');
+      panel.show();
+      panel.find('.mod-body').datepicker({
+        yearRange: '2000:'+window.thisYear,
+        maxDate : +0,
+        onSelect:function(date){
+          renderTodayChart(date, true);
+          panel.hide();
+          for(i in global.contrast){
+            if(global.contrast[i] == date){
+              return false;
+            }
+          }
+          global.contrast.push(date);
+        }
+      })
+      return false;
+    });
+    
+    renderTodayChart("2013-06-03", false);
+
+    // top 10 version chart
+    $('#top10_version_tabpanel').renderTab({
+      data: [
+        { name: "新增用户", particle : "install", flag : "true" },
+        { name: "活跃用户", particle : "active", flag : "true" },
+        { name: "累计用户", particle : "add_up", flag : "true" }
+      ],
+      default_type : "install",
+      callback : function(tar,attr,index,txt){
+        renderVersionChart(attr);
+      }
+    });
+    renderVersionChart("install")
+
+    // top 10 channel chart
+    $('#top10_channel_tabpanel').renderTab({
+      data: [
+        { name: "新增用户", particle : "install", flag : "true" },
+        { name: "活跃用户", particle : "active", flag : "true" },
+        { name: "累计用户", particle : "add_up", flag : "true" }
+      ],
+      default_type : "install",
+      callback : function(tar,attr,index,txt){
+        renderChannelChart(attr);
+      }
+    });
+    renderChannelChart("install")
+
+    // trends chart
+    $('#trends_period').renderTab({
+      data: [
+        { name: "过去7天", particle: "-7", flag: "true" },
+        { name: "过去30天", particle: "-30", flag: "true" },
+        { name: "过去90天", particle: "-90", flag: "true" }
+      ],
+      default_type: '-30',
+      callback: function(tar, attr, index, txt){
+        var intdate = parseInt(attr);
+        var days = $.GetDate(intdate);
+        global.fixedStartDay = days[0];
+        global.fixedEndDay   = days[1];
+
+        var url = '/apps/' + global.appid + '/reports/';
+        var stats = $('#trends_tabpanel_items').renderTab('get_status');
+
+        if(stats == 'installationRate'){
+          var params = {
+            start_date : global.fixedStartDay,
+            end_date   : global.fixedEndDay,
+            stats: global.action_stats+'_'+stats
+          };
+          render_chart('trends_chartcontainer', '', url+'load_chart_data', params, false,
+            {
+              yAxis: {
+                labels: {
+                  formatter: function() {
+                    return this.value;
+                  }
+                }
+              },
+              chart: {type: 'column'},
+              tooltip: {
+                enabled: true,
+                formatter: function() {
+                  return '<b>'+ this.x +'</b><br/>'+
+                    this.series.name +': '+ this.y +'<br/>'+
+                    '当日活跃: '+ this.point.stackTotal;
+                }
+              },
+              plotOptions: {
+                column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                    enabled: false,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                  }
+                },
+              },
+            }
+          );
+        }
+        else if(stats == 'avgDuration'){
+          var params = {
+            start_date : global.fixedStartDay,
+            end_date   : global.fixedEndDay,
+            stats: global.action_stats+'_'+stats
+          };
+          render_chart('trends_chartcontainer', '', url+'load_chart_data', params, false,
+            {
+              yAxis: {
+                labels: {
+                  formatter: function() {
+                    var hh = Math.floor(this.value / 3600);
+                    var mm = Math.floor(this.value % 3600 / 60);
+                    var ss = Math.floor(this.value % 60);
+
+                    if (hh == 0) {
+                      return mm + '分' + ss + '秒';
+                    } else {
+                      return hh + '时' + mm + '分' + ss + '秒';
+                    }
+                  }
+                }
+              },
+              tooltip: {
+                enabled: true,
+                formatter: function() {
+                  var hh = Math.floor(this.y / 3600);
+                  var mm = Math.floor(this.y % 3600 / 60);
+                  var ss = Math.floor(this.y % 60);
+
+                  if (hh == 0) {
+                    return this.x + '日'+ this.series.name + ' : ' + mm + '分' + ss + '秒';
+                  } else {
+                    return this.x + '日'+ this.series.name + ' : ' + hh + '时' + mm + '分' + ss + '秒';
+                  }
+                }
+              },
+            }
+           );
+        }
+        else{
+          renderTrendsChart();
+        }
+
+        renderTrendsTable();
+        if(attr != -7){
+          $('#totalDetails').find('.pagination').removeClass('hidden');
+          if(!$('#totalDetails').hasClass('hidden')){
+            $('.expandCollapse').parent().css('border-top','1px solid #B4B4B4');
+          }
+        }
+      }
+    });
+
+    $('#trends_tabpanel_items').renderTab({
+      data: [
+        { name: '新增用户', particle: 'installation', flag: "true" },
+        { name: '累计用户', particle: 'accumulation', flag: "true" },
+        { name: '活跃用户', particle: 'activeUser', flag: "true" },
+        { name: '活跃用户构成', particle: 'installationRate', flag: "true" },
+        { name: '启动次数', particle: 'launch', flag: "true" },
+        { name: '平均单次使用时长', particle: 'avgDuration', flag: "true" },
+      ],
+      default_type: 'installation',
+      callback: function(tar, attr, index, txt){
+        if(attr == 'installationRate'){
+          var url = '/apps/' + global.appid + '/reports/';
+          var stats = $('#trends_tabpanel_items').renderTab('get_status');
+          var params = {
+            start_date : global.fixedStartDay,
+            end_date   : global.fixedEndDay,
+            stats: global.action_stats+'_'+stats
+          };
+          render_chart('trends_chartcontainer', '', url+'load_chart_data', params, false,
+            {
+              yAxis: {
+                labels: {
+                  formatter: function() {
+                    return this.value;
+                  }
+                }
+              },
+              chart: {type: 'column'},
+              tooltip: {
+                enabled: true,
+                formatter: function() {
+                  return '<b>'+ this.x +'</b><br/>'+
+                    this.series.name +': '+ this.y +'<br/>'+
+                    '当日活跃: '+ this.point.stackTotal;
+                }
+              },
+              plotOptions: {
+                column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                    enabled: false,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                  }
+                },
+              },
+            }
+          );
+        }
+        else if(attr == 'avgDuration'){
+          var url = '/apps/' + global.appid + '/reports/';
+          var stats = $('#trends_tabpanel_items').renderTab('get_status');
+
+          var params = {
+            start_date : global.fixedStartDay,
+            end_date   : global.fixedEndDay,
+            stats: global.action_stats+'_'+stats
+          };
+          render_chart('trends_chartcontainer', '', url+'load_chart_data', params, false,
+            {
+              yAxis: {
+                labels: {
+                  formatter: function() {
+                    var hh = Math.floor(this.value / 3600);
+                    var mm = Math.floor(this.value % 3600 / 60);
+                    var ss = Math.floor(this.value % 60);
+
+                    if (hh == 0) {
+                      return mm + '分' + ss + '秒';
+                    } else {
+                      return hh + '时' + mm + '分' + ss + '秒';
+                    }
+                  }
+                }
+              },
+              tooltip: {
+                enabled: true,
+                formatter: function() {
+                  var hh = Math.floor(this.y / 3600);
+                  var mm = Math.floor(this.y % 3600 / 60);
+                  var ss = Math.floor(this.y % 60);
+
+                  if (hh == 0) {
+                    return this.x + '日'+ this.series.name + ' : ' + mm + '分' + ss + '秒';
+                  } else {
+                    return this.x + '日'+ this.series.name + ' : ' + hh + '时' + mm + '分' + ss + '秒';
+                  }
+                }
+              },
+            }
+           );
+        }
+        else{
+          renderTrendsChart();
+        }
+      }
+    })
+
+    renderTrendsChart();
+    renderTrendsTable();
+
+    renderScaleTable();
+    renderSummaryTable();
+    //export reports
+    $('#export_hours').bind('click',function(e){
+      $(this)._export(e,{'stats': 'index_hours_csv', 'url': '/apps/'+global.appid+'/reports/load_chart_data'});
+    })
+    $('#export_trends').bind('click',function(e){
+      $(this)._export(e,{'stats': 'index_trends_csv'});
+    })
+  });
+  $('#today_constr_date_popform').bind('click',function(e){
+    stopBubble(e);
+  })
+</script>
+<script src="__PUBLIC__/js/caChartData.js" type="text/javascript"></script>-->
+
+
+<script src="__PUBLIC__/js/base.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$('#export_hours').bind('click',function(e){
+      $(this)._export(e,{'stats': 'index_hours_csv', 'url': '/apps/'+global.appid+'/reports/load_chart_data'});
+    })	
+})
+</script>
+</body></html>

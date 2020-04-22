@@ -1,0 +1,251 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/lhgdialog/lhgdialog.min.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+  // 在这里写你的代码...
+  setfalg();
+  chgInputJM();
+  getAll_shopid();
+});
+
+function getAll_shopid(){
+	var s = [];
+	$('input[name="item_id[]"]').each(function(){
+	   	s.push($(this).val());
+	});
+	jQuery.unique(s);
+	idsarray = s;
+	//alert(idsarray);
+}	
+var idsarray = new Array();   
+
+function addShop(a,b,i){
+	  var id = i;
+      var html = '  <tr id="Shop'+ id +'">';
+		  html += '<td>'+ id +'</td>';
+ 		  html += ' <td><input name="item_id[]" type="text" style="width:100px;" value="'+ a +'" readonly></td>';
+  		  html += ' <td><input name="item_name[]" type="text" style="width:100px;" value="'+ b +'" readonly></td>';
+  		  html += ' <td><input name="number[]" type="text" style="width:50px;" value=""></td>';		
+		  html += '  <td><input type="button" value="删除" onclick="delShop('+ id +');" /></td>';	
+          html += ' </tr>';	
+		  
+		  $("#djlist").append(html);
+	      $("#flag2").val(id+1);
+}
+
+
+function opdg()
+{
+    $.dialog({ 
+	 title: "商品道具选择",
+	 width: 450,
+     height: 350,
+     content: 'url:__URL__/selectShop',
+     lock:true
+	
+	});
+}
+
+function delShop(i){
+	$("#Shop"+i).remove();
+}
+
+function chgInputJM(){
+    var qfflag = $('input[name="isqf"]:checked').val();
+	  if(qfflag==1){
+		 $('#oneid').hide();
+		 $('#arrayid').show();  
+	  }else{
+		 $('#arrayid').hide();
+		 $('#oneid').show();   
+	  }
+	 // alert(qfflag);
+}
+//选择服务器组
+function selectServerGroup(){
+	  var id = $('#gid').val();
+	  
+	  if(id==0)
+	  {	
+	     $('#serverID').find("option").remove(); 
+		 alert('请先选择游戏服务器组');  
+	  }else{
+		 var flag = $('#serverFlag').val();
+		// alert(flag);	
+		
+		// alert(flag);
+		 if(flag==0){
+			
+			  $.ajax({
+			   type: "POST",
+			   url: "__URL__/select_Server",
+			   data: "gid="+id,
+			   dataType: "json",
+			   success: function(msg){
+				  // alert(msg);
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#serverID').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#serverFlag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+	
+  }
+  
+  function setfalg(){
+	 $('#serverFlag').val(0);	
+	 $('#serverID').find('option').remove();
+				  
+ }
+ 
+ function getAll_ydid(){
+	var s = [];
+	$('input[name="dt_ddid[]"]').each(function(){
+	   	s.push($(this).val());
+	});
+	jQuery.unique(s);
+	idsarray = s;
+	//alert(idsarray);
+}
+</script>
+
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/saveMailRelease" enctype="multipart/form-data">
+  <input type="hidden" name="uid" value="{$sess.uid}">
+ 
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+ 
+  <tr>
+    <td class="tRight">选择游戏服务器组：</td>
+    <td class="tLeft" >
+    	{$vo.gid|toServerGroup}
+    </td>
+  </tr>
+ 
+   <tr>
+    <td class="tRight">选择游戏服务器：</td>
+    <td class="tLeft" >
+        {$vo.serverID|toServer}
+    </td>
+  </tr>
+ 
+ 
+  <tr>
+    <td class="tRight">是否群发：</td>
+    <td class="tLeft" >{$vo.isqf|toend}</td>
+  </tr>
+  <tr id="oneid">
+    <td class="tRight">账号ID：</td>
+    <td class="tLeft" >{$vo.account_id}
+     </td>
+  </tr>
+   <tr id="arrayid">
+    <td class="tRight">账号数组：</td>
+    <td class="tLeft" ><textarea name="account_ids"  cols="40" rows="7" style="padding:5px;">{$vo.account_ids}</textarea>
+     </td>
+  </tr>
+  <tr>
+    <td class="tRight">邮件标题：</td>
+    <td class="tLeft" >{$vo.title}</td>
+  </tr>
+  <tr>
+    <td class="tRight">邮件内容：</td>
+    <td class="tLeft" ><textarea name="content"  cols="40" rows="5" style="padding:5px;">{$vo.content}</textarea>
+      &nbsp;&nbsp;</td>
+  </tr>
+   <tr>
+    <td class="tRight">金币：</td>
+    <td class="tLeft" >{$paragm[0]}</td>
+  </tr>
+   <tr>
+    <td class="tRight">钻石：</td>
+    <td class="tLeft" >{$paragm[1]}</td>
+  </tr>
+   <tr>
+    <td class="tRight">荣誉：</td>
+    <td class="tLeft" >{$paragm[2]}</td>
+  </tr>
+   <tr>
+    <td class="tRight">公会石：</td>
+    <td class="tLeft" >{$paragm[3]}</td>
+  </tr>
+   <tr>
+    <td class="tRight">体力：</td>
+    <td class="tLeft" >{$paragm[4]}</td>
+  </tr>
+    <tr>
+    <td class="tRight">保存天数：</td>
+    <td class="tLeft" >{$vo.days}</td>
+  </tr>
+   <tr>
+    <td class="tRight">附件：</td>
+    <td class="tLeft" >
+     
+   
+    <table border="0" cellspacing="0" cellpadding="0" id="djlist">
+  <tr>
+    <td>序号</td>
+    <td>道具ID</td>
+    <td>道具名称</td>
+    <td>数量</td>
+
+  </tr>
+  <volist name="newfj" id="newfj" key="k" >
+  <tr>
+    <td>{$k}</td>
+    <td>{$newfj.item_id}</td>
+    <td>{$newfj.item_name}</td>
+    <td>{$newfj.num}</td>
+  </tr>
+  </volist>
+  
+ 
+</table>
+
+    </td>
+  </tr>
+ 
+   <tr>
+    <td class="tRight">请求发送url：</td>
+    <td class="tLeft" >{$vo.sendurl}</td>
+  </tr>
+  <tr id="oneid">
+    <td class="tRight">执行结果：</td>
+    <td class="tLeft" >{$vo.result}</td>
+  </tr>
+  <tr id="oneid">
+    <td class="tRight">操作时间：</td>
+    <td class="tLeft" >{$vo.createtime|toDefaultDate}</td>
+  </tr>
+   <tr id="oneid">
+    <td class="tRight">操作人：</td>
+    <td class="tLeft" >{$vo.user_id|toUser}</td>
+  </tr>
+    <td></td>
+    <td class="center">
+       
+      </td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

@@ -1,0 +1,142 @@
+html,body{
+  background:#438eb9;
+  height:100%;
+}
+.panel{
+  height:100%;
+}
+input:-webkit-autofill {
+    background:none !important;
+    -webkit-box-shadow:0 0 0px 1000px white inset;
+}
+.contentpanel{
+  width:980px;
+  height:818px;
+  margin:0 auto 0 -490px;
+  background:url(../images/contentbg01.gif) no-repeat 0 0; position:absolute; left:50%;
+}
+.content_xiao{width:548px; margin:0 auto;}
+.login_logo{margin-top:200px; text-align:center;}
+.formpanel{
+  padding:102px 0 0 0;
+}
+.formpanel p{margin-bottom:15px;}
+.formpanel p img{vertical-align:middle;}
+.login_list_left{display:inline-block; width:130px; text-align:right; padding-right:15px; font-size:18px; color:#066ca8; line-height:46px;}
+.input-bg-new input{height:44px; border:1px solid #cfcfcf; background:#f2f2f2; padding:0 10px; line-height:44px; vertical-align:middle; border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; -o-border-radius:5px; box-shadow:0 2px 1px -1px #fff;}
+.input-bg-new input:focus{background:#fff; border:1px solid #438fba;}
+.input-bg-new-lang input{width:313px;}
+.input-bg-new-xiao input{width:137px; margin-right:10px;}
+a.sx_icon{vertical-align:middle; display:inline-block; width:19px; height:46px; background:url(../images/sx_icon.png) no-repeat; margin-left:17px;}
+a.sx_icon:hover{background:url(../images/sx_icon.png) no-repeat 0 -46px;}
+.input-bg{
+  background:url(../images/input-normal.png) no-repeat 0 0;
+  padding:0 10px;
+  border-radius:5px;
+  display:inline-block;
+  width:253px;
+  height:48px;
+  line-height:48px;
+  margin-bottom:18px;
+  position:relative;
+}
+.input-bg-active{
+  background:url(../images/input-actives.png) no-repeat 0 0;
+}
+.input-bg input {
+  border:0;
+  background:none;
+  box-shadow:none;
+  height:25px;
+  line-height:25px;
+  padding:11px 15px;
+  width:204px;
+  vertical-align:middle;
+}
+.formpanel .input-bg h4{
+  position:absolute;
+  left:260px;
+  z-index:5;
+  width:114px;
+  top:11px;
+  line-height:27px;
+  height:27px;
+  padding:0 10px;
+  background:#dc5449;
+  border-radius:6px;
+  box-shadow: 4px 4px 1px #c7c7c7;
+}
+.formpanel .btnpanel{
+  padding:5px 0;
+}
+.formpanel .btnpanel .submit{
+  background:url(../images/login_button.png) 0 0 no-repeat;
+  border:none;
+  box-shadow:none;
+  width:161px;
+  height:60px;
+  cursor:pointer;
+  color:#fff;
+  font-size:26px; line-height:52px;
+}
+.formpanel .btnpanel .submit:hover{
+  background:url(../images/login_button.png) 0 -60px no-repeat;
+}
+.formpanel .btnpanel .submit:active{
+  background:url(../images/login_button.png) 0 -60px no-repeat;
+}
+.formpanel .btnpanel span{
+  padding-left:10px;
+}
+.formpanel .btnpanel span a{
+  margin-left:5px;
+  color:#444; font-size:14px;
+  text-decoration: underline;
+}
+.footer{
+  margin-top:-40px;
+}
+.footer p{
+  text-align:center;
+  padding:10px 0;
+}
+.footer p span{
+  padding:0 25px;
+}
+.footer p a{
+  color:#333;
+  padding:0 2px;
+}
+label.error {
+  color:#fff;
+}
+.mistake{
+  color:#dc5449;
+  padding: 0 100px 0 3px;
+  margin-bottom:10px;
+  text-indent:24px;
+  font-size:13px;
+  background:url(i.png) 3px 1px no-repeat;
+}
+.confirmation, .notice{
+  color:#2b518c;
+  padding: 0 100px 0 13px;
+  margin-bottom:10px;
+  border-left:1px solid #2b518c;
+  font-size:13px;
+}
+.input-bg .corner{
+  width:0; 
+  height:0; 
+  border-width:5px 5px 5px 5px;
+  padding:0;
+  font-size:0;
+  line-height:0;
+  border-style:solid; 
+  border-color:transparent #dc5449 transparent transparent;
+  position:absolute;
+  left:-9px;
+  top:8px;
+  z-index:99;
+}
+.col-sm-6 .dataTables_length{float:left;}

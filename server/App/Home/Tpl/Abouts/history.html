@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$now.title} - {$web.webname}</title>
+    <meta name="keywords" content="{$now.title} - {$web.webname}" />
+    <meta name="description" content="{$now.title} - {$web.webname} - {$web.meta}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="__PUBLIC__/home/js/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="__PUBLIC__/home/css/styles.css"/>
+</head>
+
+<body id="abouts" data-components="tab,acorr,linkfollower,colorbox,hashreload:#0">
+<include file="../Common/head" />
+	<section class="banner" style="background-image:url('__PUBLIC__/Data/thumbnail/share/images/default/p18c4ajds1108o1v8791ds2t0k3.jpg_2000x2000.jpg')">
+	</section>
+<include file="../Common/tophead" />
+
+
+
+
+<section class="content center content-page" id="content">
+    <h1>
+        {$now.title}
+        <small>{$now.etitle}</small>
+    </h1>
+    <div class="history-tabs role-tabs">
+    <div class="history-prev role-prev left"></div>
+    <div class="history-next role-next right"></div>
+    <div class="tab-list role-list" data-loop="false">
+        <div class="list-inner">
+            <volist name="years" id="years" key="k">
+            <a class="<eq name='k' value='1'>tab-on</eq>">
+                <div class="dot"></div>
+                <div class="year">{$years.title}</div>
+            </a>
+            </volist>
+        </div>
+    </div>
+</div>
+    <div class="tab-contents">
+        <volist name="things" id="things" key="k">
+            <div class="tab-content  <neq name='k' value='1'>hidden</neq>">
+                <dl class="award-list">
+                    <volist name="things.list" id="ttt">
+                        <dd><span class="before"></span><span class="name">{$ttt}</span></dd>
+                    </volist>
+                </dl>
+            </div>
+        </volist>
+    </div>
+</section>
+
+<include file="../Common/foot" />
+
+<div id="btn_top" class="btn_top"><div class="btn_top_wrap"></div></div>
+
+
+<!--[if lte IE 6]>
+<script src="__PUBLIC__/home/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>DD_belatedPNG.fix('img');</script>
+<script type="text/javascript" src="__PUBLIC__/share/js/minmax.js"></script>
+<![endif]-->
+<script src="__PUBLIC__/home/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 100){
+                $('#btn_top').fadeIn(300);
+            }else{
+                $('#btn_top').fadeOut(300);
+            }
+        });
+        $('#btn_top').click(function(){$('html,body').animate({scrollTop: '0px'}, 0);});
+    });
+</script>
+
+<script type="text/javascript">
+
+    /**
+     * 手机版的menu的data-toggle
+     */
+    (function($){
+        if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            var $a =  $('#navmenu .dropdown > a'),
+                    firstValid = false;
+            $a.each(function(){
+                var $item = $(this);
+                if(firstValid){
+                    $item.removeAttr('data-toggle');
+                }else{
+                    firstValid = true;
+                }
+
+            });
+        }else{
+            //地址a标签替换
+            var pathname = location.pathname;
+            pathname = pathname.replace(".html",'');
+            var $link = $('#navmenu .dropdown a');
+            $link.each(function(){
+                var $a = $(this),
+                        href = $a.attr('href');
+                href = href.replace('.html','');
+                if(pathname.indexOf(href) >=0){
+                    $a.addClass('on');
+                }
+            });
+        }
+    })($);
+</script>
+
+<script src="__PUBLIC__/home/js/plugins.js"></script>
+<script src="__PUBLIC__/home/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/home/js/jquery.colorbox-min.js"></script>
+
+<script src="__PUBLIC__/home/js/iscroll.js"></script>
+
+<script type="text/javascript">
+    // 菜单scroll，当菜单栏宽度过短时隐藏两边按钮
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        var $scrollNav = $('nav.sub-nav');
+        if($scrollNav.length){
+            $children = $scrollNav.find('.inner a');
+            var scrollWidth = 0,
+                    scrollLeft = 0;
+            $children.each(function(){
+                //console.log($(this).outerWidth(true));
+                var ele = $(this);
+                if(ele.hasClass('on')){
+                    scrollLeft = scrollWidth;
+                }
+                scrollWidth += ele.outerWidth(true);
+            });
+            //隐藏两边按钮
+            if($scrollNav.width() - 40 >= scrollWidth){
+                $scrollNav.addClass('hideDir');
+
+            }else{
+                scrollWidth +=40;
+                $scrollNav.find('.inner').width(scrollWidth);
+                var myScroll = new iScroll($scrollNav[0],{
+                    vScroll : false,
+                    hScroll : true,
+                    hScrollbar: false,
+                    onBeforeScrollStart : function(e){
+                        $('.sub-nav').addClass('start');
+                        e.preventDefault();
+                    },
+                    onTouchEnd : function(){
+                        $('.sub-nav').removeClass('start');
+                    }
+                });
+                myScroll.scrollTo(-scrollLeft);
+            }
+
+
+
+        }
+    }
+
+
+
+</script>
+
+
+	
+</body>
+</html>

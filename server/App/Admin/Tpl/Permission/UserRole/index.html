@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+  <title>{$title}</title>
+  
+ <meta http-equiv="Cache-Control" content="max-age=7200" />
+
+  <link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script language="javascript">
+function add(){
+    window.location = "__URL__/add";	
+}
+</script>
+<script type="text/javascript">
+
+function edit(x){
+	window.location = "__URL__/edit/{$x}/" + x;
+}
+function del(x){
+	window.location =  "__URL__/del/{$x}/" + x;
+}
+function chmod(x){
+	window.location =  "__URL__/chmods/{$x}/" + x;
+}
+function chmoddh(x){
+	window.location =  "__URL__/chmodsdh/{$x}/" + x;
+}
+</script>
+</head>
+<load href='__PUBLIC__/css/layout.css' />
+<body>
+<div id="doc">
+      <!--head开始-->
+    
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+   
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+              <include file="../common/common" />
+          	<div class="mod-header radius clearfix"><h2>系统角色管理</h2></div>
+            <div class="mod-body mod-body-ie8">
+            	<div class="content register_content_center">
+                    <div class="user marginB15">
+                    	<div class="floatL">
+                         <form action="" method="post" name="chaxun">
+                            用户组:
+                            <select name="pid">
+                             <volist name="glist" id="vs">
+                              <option value="{$vs.id}">{$vs.name}</option>
+                             </volist>
+                            </select>
+                         
+                          
+                            <input type="submit" value="检索" class="jiansuo">
+                            </form>
+                    	</div>
+                   	<html:imageBtn name="add" value="添加角色" click="add()" style="impBtn01 floatL shadow" />
+                    </div> 
+                	<!-- 列表显示区域  -->
+                    <tagLib name="html" />
+                    <div class="list" >
+                    <div id="result" class="result none"></div>
+                    <html:list id="checkList" name="node" style="list" checkbox="true" action="true" datasource="list" show="id:编号,pid|toUserAccess:用户组,name:用户角色,remark:备注说明,status|getStatus:启用/禁用:edit,create_time|toDate:创建时间,update_time|toDate:修改时间" actionlist="edit:编辑:id,del:删除:id,chmoddh:导航授权:id,chmod:功能授权:id" />
+                    </div>
+                    <!--  分页显示区域 -->
+                    <div class="page">{$page}</div>
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+     
+    </div>
+
+
+</body>
+</html>

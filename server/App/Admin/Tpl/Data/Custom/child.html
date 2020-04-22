@@ -1,0 +1,62 @@
+<!DOCTYPE>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="__PUBLIC__/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script language="javascript">
+function addmuch(){
+    window.location = "__URL__/addmuch";	
+}
+</script>
+<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script type="text/javascript">
+function edit(x){
+	window.location = "__URL__/edit/Id/" + x;
+}
+function del(x){
+	window.location =  "__URL__/del/{$x}/" + x;
+}
+</script>
+</head>
+<body>
+<div id="doc">
+      <!--head开始-->
+      
+      <!--head结束-->
+      <div class="bd clearfix">
+        <!--左侧开始-->
+        
+        <!--左侧结束-->
+        <div id="mainContainer">
+          <div class="mod mod1">
+            <ul class="tab_title">
+                <li><a href="__APP__/Data/Customgroup/add">添加分类类型</a></li>
+                <li><a href="__APP__/Data/Customgroup/index">分类类型管理</a></li>
+                <li><a href="__APP__/Data/Custom/addmuch">添加自定义分类</a></li>
+                <li class="on"><a href="__APP__/Data/Custom/index"> 自定义分类管理</a></li>
+            </ul>
+          	<div class="mod-header radius clearfix"><h2>自定义分类管理</h2></div>
+            <div class="mod-body mod-body-ie8">
+            	<div class="content register_content_center">
+                    <html:imageBtn name="add" value="新增" click="addmuch()" style="impBtn hMargin fLeft shadow" />
+                    <!-- 列表显示区域  -->
+                    
+                    <tagLib name="html" />
+                    <div class="list" >
+                    <div id="result" class="result none"></div>
+                    <html:list id="checkList" name="node" style="list" checkbox="true" action="true" datasource="vo" show="id:编号,Name:栏目名称:child,type:类型id,type|customgroupid_to_name:分类名称,status|getStatus:启用/禁用,Priority:排序" actionlist="edit:编辑:Id,del:删除:Id" />
+                    </div>
+                    <!--  分页显示区域 -->
+                    <div class="page">{$page}</div>
+                </div>
+            </div>
+		  </div>
+        </div>
+      </div>
+      <div class="hiddenft"></div>
+     
+    </div>
+
+
+</body>
+</html>

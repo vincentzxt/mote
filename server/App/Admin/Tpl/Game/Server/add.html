@@ -1,0 +1,67 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<load href='__PUBLIC__/js/jquery-1.8.3.min.js' />
+
+<body>
+<form method='post' id="form1" name="form1" action="__URL__/insert" enctype="multipart/form-data">
+  <input type="hidden" name="uid" value="{$sess.uid}">
+  <input type="hidden" name="t1"  class="medium" value="{$map['t1'][1]}" >
+<input type="hidden" name="t2"  class="medium" value="{$map['t2'][1]}" >
+<input type="hidden" name="t3"  class="medium" value="{$map['t3'][1]}" >
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+ 
+  <tr>
+    <td class="tRight">选择游戏服务器组：</td>
+    <td class="tLeft" >
+    	<select name="gid">
+        <option value="0" class="0">请选择</option>
+        <volist name="ServerGroup" id="ServerGroup">
+          <option value="{$ServerGroup.gid}" class="{$ServerGroup.gid}">
+          {$ServerGroup.aid|toagame} - {$ServerGroup.gname}  >>>>平台：{$ServerGroup.pid|togameland}</option>
+        </volist>
+      </select>
+    </td>
+  </tr>
+  
+ 
+  <tr>
+    <td class="tRight">服务器名称：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="name" id="name"></td>
+  </tr>
+  <tr>
+    <td class="tRight">服务器别名：</td>
+    <td class="tLeft" ><input type="text" class="huge " name="alias" id="alias">
+     </td>
+  </tr>
+  <tr>
+    <td class="tRight">内网ip：</td>
+    <td class="tLeft" ><input type="text" class="huge " name="ip" id="ip"></td>
+  </tr>
+  <tr>
+    <td class="tRight">外网ip：</td>
+    <td class="tLeft" ><input type="text" class="huge" name="wip" value="" id="wip">
+      &nbsp;&nbsp;</td>
+  </tr>
+   <tr>
+    <td class="tRight">备注：</td>
+    <td class="tLeft" ><textarea name="beizhu" cols="35" rows="5"></textarea>
+      &nbsp;&nbsp;</td>
+  </tr>
+ 
+  
+    <td></td>
+    <td class="center">
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>">
+        <input type="submit" value="保 存"  class="button small" style="width:50px">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" class="button small" onClick="resetEditor()" style="width:50px" value="重 置" >
+      </td>
+  </tr>
+</form>
+</table>
+</body>
+</div>
+</div>

@@ -1,0 +1,56 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+<div class="content">
+<div class="title">添加数据 [<a href="__URL__">返回列表</a>]</div>
+<div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<load href='__PUBLIC__/js/jquery-1.8.3.min.js' />
+
+<body>
+  <form method='post' id="form1" action="__URL__/SaveAddMuch" >
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <table cellpadding=3 cellspacing=3>
+                    <tr>
+                      <td class="tRight" >分类名称：</td>
+                      <td class="tLeft" ><label for="textarea"></label>
+                        <textarea name="textarea" id="textarea" cols="45" rows="10">测试命令 ceshi 1</textarea>
+                        格式为（空格隔开）：命令说明 命令 数量<br>
+                                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >上级目录：</td>
+                        <td class="tLeft" >
+                        <select name="type">
+                              <volist name="str0" id="data">
+                                <option value="{$data.Id}" 
+                                <eq name="data.Id" value="$vo.fazhan">selected</eq>
+                                >{$data.Name}
+                                </option>
+                              </volist>
+      					   </select>
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >状态：</td>
+                        <td class="tLeft" ><select name="status">
+                          <option value="1" selected="selected">开启</option>
+                          <option value="0">关闭</option>
+                          </select></td>
+                    </tr>
+                    <tr>
+                        <td class="tRight" >排序：</td>
+                        <td class="tLeft" ><label for="textfield"></label>
+                          <input name="order" type="text" id="order" value="1" /></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="submit" value="保 存" class="imgButton"><input type="reset" class="imgButton" value="清 空" ></td>
+                    </tr>
+                    </table>
+                    </form>
+</table>
+</body>
+</div>
+</div>

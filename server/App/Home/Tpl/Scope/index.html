@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$vo.tname} - {$web.webname}</title>
+    <meta name="keywords" content="{$vo.meta} - {$web.webname}" />
+    <meta name="description" content="{$vo.des} - {$web.webname} - {$web.meta}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="__PUBLIC__/home/js/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="__PUBLIC__/home/css/styles.css"/>
+</head>
+
+<body id="abouts" data-components="tab,acorr,linkfollower,colorbox,hashreload:#0">
+<include file="../Common/head" />
+
+<section class="content content-page center" id="content">
+    <include file="head" />
+
+    <div class="pre scope-content col2 collapsed">
+        {$vo.Body}
+    </div>
+    <include file="../Common/form" />
+    <ul class="caseslist role-waterfall" id="caseslist">
+        <volist name="list" id="list">
+            <li class="column">
+            <a title="{$list.title}" href="__ROOT__/Showcases/detail/id/{$list.id}" _id="{$list.id}">
+                <img src="{$list.Imageurl}" class="bg">
+                <div class="cover">
+                    <div class="desc">
+                        <div class="cell">
+                            <img src="/{$list.linkID|tologo}" class="logo">
+                            <p class="name">{$list.from}-{$list.title}</p>
+                            <p>
+                                <strong>{$list.hits}</strong>平方米
+                            </p>
+                        </div><div class="after"></div>
+                    </div>
+                    <div class="title">
+                        <span class="right case-to"></span>
+                        <p class="name">
+                            {$list.from}
+                            <span class="unit">{$list.hits}</span>
+                        </p>
+                        <p>{$list.title}</p>
+                    </div>
+                </div>
+            </a>
+        </li>
+        </volist>
+    </ul>
+</section>
+
+<include file="../Common/foot" />
+
+<div id="btn_top" class="btn_top"><div class="btn_top_wrap"></div></div>
+
+
+<!--[if lte IE 6]>
+<script src="__PUBLIC__/home/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>DD_belatedPNG.fix('img');</script>
+<script type="text/javascript" src="__PUBLIC__/share/js/minmax.js"></script>
+<![endif]-->
+<script src="__PUBLIC__/home/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 100){
+                $('#btn_top').fadeIn(300);
+            }else{
+                $('#btn_top').fadeOut(300);
+            }
+        });
+        $('#btn_top').click(function(){$('html,body').animate({scrollTop: '0px'}, 0);});
+    });
+</script>
+
+<script type="text/javascript">
+
+    /**
+     * 手机版的menu的data-toggle
+     */
+    (function($){
+        if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            var $a =  $('#navmenu .dropdown > a'),
+                    firstValid = false;
+            $a.each(function(){
+                var $item = $(this);
+                if(firstValid){
+                    $item.removeAttr('data-toggle');
+                }else{
+                    firstValid = true;
+                }
+
+            });
+        }else{
+            //地址a标签替换
+            var pathname = location.pathname;
+            pathname = pathname.replace(".html",'');
+            var $link = $('#navmenu .dropdown a');
+            $link.each(function(){
+                var $a = $(this),
+                        href = $a.attr('href');
+                href = href.replace('.html','');
+                if(pathname.indexOf(href) >=0){
+                    $a.addClass('on');
+                }
+            });
+        }
+    })($);
+</script>
+
+<script src="__PUBLIC__/home/js/plugins.js"></script>
+<script src="__PUBLIC__/home/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/home/js/jquery.colorbox-min.js"></script>
+
+<script src="__PUBLIC__/home/js/iscroll.js"></script>
+
+<script type="text/javascript">
+    // 菜单scroll，当菜单栏宽度过短时隐藏两边按钮
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        var $scrollNav = $('nav.sub-nav');
+        if($scrollNav.length){
+            $children = $scrollNav.find('.inner a');
+            var scrollWidth = 0,
+                    scrollLeft = 0;
+            $children.each(function(){
+                //console.log($(this).outerWidth(true));
+                var ele = $(this);
+                if(ele.hasClass('on')){
+                    scrollLeft = scrollWidth;
+                }
+                scrollWidth += ele.outerWidth(true);
+            });
+            //隐藏两边按钮
+            if($scrollNav.width() - 40 >= scrollWidth){
+                $scrollNav.addClass('hideDir');
+
+            }else{
+                scrollWidth +=40;
+                $scrollNav.find('.inner').width(scrollWidth);
+                var myScroll = new iScroll($scrollNav[0],{
+                    vScroll : false,
+                    hScroll : true,
+                    hScrollbar: false,
+                    onBeforeScrollStart : function(e){
+                        $('.sub-nav').addClass('start');
+                        e.preventDefault();
+                    },
+                    onTouchEnd : function(){
+                        $('.sub-nav').removeClass('start');
+                    }
+                });
+                myScroll.scrollTo(-scrollLeft);
+            }
+
+
+
+        }
+    }
+
+
+
+</script>
+
+
+	
+</body>
+</html>

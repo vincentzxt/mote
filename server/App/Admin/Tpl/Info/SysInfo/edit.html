@@ -1,0 +1,96 @@
+<include file="Public:header" />
+<div id="main" class="main" >
+  <div class="content">
+    <div class="title">网站配置</div>
+    <div id="result" class="result none"></div>
+<load href='__PUBLIC__/css/layout.css' />
+<tagLib name="html" />
+<script type="text/javascript">
+function add(){
+    window.location = "__URL__/add";	
+}
+function edit(x){
+	window.location = "__URL__/edit/{$x}/" + x;
+}
+function del(x){
+	window.location =  "__URL__/delonepage/{$x}/" + x;
+}
+</script>
+<div class="content" >
+<!--  功能操作区域  -->
+<div class="operate" >
+
+<!-- 查询区域 -->
+<div class="fRig">
+
+</div>
+<!-- 功能操作区域结束 -->
+
+<!-- 列表显示区域  -->
+<div class="list" >
+  <form method='post' id="form1" name="form1" action="__URL__/update"  enctype="multipart/form-data">
+<input type="hidden" name="id" value="1">
+  <table cellpadding=3 cellspacing=3  width="100%" class="list">
+  <tr>
+    <td width="122">网站名称：</td>
+    <td width="651">
+      <input name="webname" type="text" size="35" value="{$vo.webname}"></td>
+  </tr>
+  <tr>
+    <td>域名：</td>
+    <td><input name="domain" type="text" size="50" value="{$vo.domain}"></td>
+  </tr>
+  <tr>
+    <td>备案信息：</td>
+    <td><input name="beian" type="text" size="50" value="{$vo.beian}"></td>
+  </tr>
+  <tr>
+    <td>网站描述：</td>
+    <td>
+      <textarea name="meta" cols="50" rows="5">{$vo.meta}</textarea>
+    </td>
+  </tr>
+    <tr>
+      <td>400电话：</td>
+      <td>
+        <input name="dianhua" type="text" size="50" value="{$vo.dianhua}">
+      </td>
+    </tr>
+    <tr>
+      <td>邮箱：</td>
+      <td>
+        <input name="email" type="text" size="50" value="{$vo.email}">
+      </td>
+    </tr>
+    <tr>
+      <td>公司地址：</td>
+      <td>
+        <input name="dizhi" type="text" size="50" value="{$vo.dizhi}">
+      </td>
+    </tr>
+  <tr>
+    <td width="122">logo：</td>
+    <td width="651"> <if condition="$vo.logo neq ''"><img src="/{$vo.logo}" width="100" height="100" > </if>
+
+      <input type="file" class="huge" name="imgFile"></td>
+  </tr>
+
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="提交"></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+</div>
+<!--  分页显示区域 -->
+
+<!-- 列表显示区域结束 -->
+</div>
+<!-- 主体内容结束 -->
+</div>
+<!-- 主页面结束 -->
+

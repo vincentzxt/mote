@@ -1,0 +1,155 @@
+<load href='__PUBLIC__/css/layout.css' />
+<load href="__PUBLIC__/Admin/Js/Base.js" />
+<load href="__PUBLIC__/Admin/Js/prototype.js" />
+<load href="__PUBLIC__/Admin/Js/mootools.js" />
+<load href="__PUBLIC__/Admin/Js/Form/CheckForm.js" />
+<load href="__PUBLIC__/Admin/Js/Think/ThinkAjax.js" />
+<load href="__PUBLIC__/Admin/Js/common.js" />
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<tagLib name="html" />
+<script type="text/javascript">
+var URL='__URL__';
+
+function add(){
+	window.location = "__URL__/add";
+}
+function edit(x){
+	window.location = "__URL__/edit/id/" + x;
+}
+function del(x){
+	window.location =  "__URL__/delD/{$x}/" + x;
+}
+
+
+$(document).ready(function(){
+  // 在这里写你的代码...
+ // setfalg();
+  //$('#serverFlag').val(0);	
+});
+
+
+
+//选择服务器组
+function selectServerGroup(){
+	  var id = $('#gid').val();
+	  
+	  if(id==0)
+	  {	
+	     $('#serverID').find("option").remove(); 
+		 alert('请先选择游戏服务器组');  
+	  }else{
+		 var flag = $('#serverFlag').val();
+		// alert(flag);	
+		
+		// alert(flag);
+		 if(flag==0){
+			
+			  $.ajax({
+			   type: "POST",
+			   url: "__URL__/select_Server",
+			   data: "gid="+id,
+			   dataType: "json",
+			   success: function(msg){
+				  // alert(msg);
+				   if(msg!=null){
+					    
+						  $.each(msg,function(i,item){
+					//遍历json数据
+						 //alert(item.id);
+						 
+						// $('#bm_id').append("<option value='0'>请选择</option>");
+						 $('#serverID').append("<option value='"+item.id+"'>"+item.name+"</option>");
+						 $('#serverFlag').val(1);
+					   }); 
+				   }
+				
+			   }
+			}); 
+		 }
+		
+	  }
+	  
+	
+  }
+  
+  function setfalg(){
+	 //$('#serverFlag').val(0);	
+	 $('#serverID').find('option').remove();
+				  
+ }
+ 
+ 
+function confirmfunc(){	
+	if(window.confirm('你确定要提交吗？')){
+         //alert("确定");
+         return true;
+    }else{
+         //alert("取消");
+         return false;
+    }	
+}
+</script>
+
+<div class="main">
+  <div class="content" >
+    <div class="title">数据列表</div>
+    <!--  功能操作区域  -->
+    <div class="operate" > </div>
+    <!-- 功能操作区域结束 -->
+    <div class="fRig">
+      <form method='post' action="">
+        游戏服务器组：
+        <select name="gid" id="gid" onChange="setfalg()">
+          <option value="0" class="0">请选择</option>
+          <volist name="ServerGroup" id="ServerGroup">
+            <option value="{$ServerGroup.gid}" class="{$ServerGroup.gid}"
+               <eq name="ServerGroup.gid" value="$req.gid">selected</eq>
+            > {$ServerGroup.aid|toagame} - {$ServerGroup.gname}  >>>>平台：{$ServerGroup.pid|togameland}</option>
+          </volist>
+        </select>
+        选择游戏服务器：
+        <input type="hidden" name="serverFlag" id="serverFlag" value="{$vo.serverFlag}">
+        <select name="serverID" id="serverID" onclick="selectServerGroup();">
+          <option value="{$req.serverID}" class="{$req.serverID}">{$req.serverID|toServer}</option>
+          
+          <volist name="Server" id="Server">
+            <option value="{$Server.id}" class="{$Server.id}"> {$Server.id} - {$Server.name} </option>
+          </volist>
+        </select>
+        玩家ID：
+        <input type="text" name="account_id"  class="medium" value="{$req.account_id}" >
+        <input type="submit" name="sub" value="查询" />
+        
+        <!-- 高级查询区域 -->
+        <div  id="searchM" class=" none search cBoth" > </div>
+      </form>
+    </div>
+    <!-- 列表显示区域  -->
+    <div id="ThinkAjaxResult" style="display:none;">11</div>
+    <div class="list" >
+      <if condition="$flag eq 1">
+     <table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>名称</td>
+    <td>字段</td>
+    <td>值</td>
+  </tr>
+  <volist name="list" id="list">
+  <tr>
+    <td>{$list[0]}</td>
+    <td>{$list[2]}</td>
+    <td>{$list[1]}</td>
+  </tr>
+  </volist>
+ 
+</table>
+</if>
+    </div>
+    <!--  分页显示区域 -->
+    <div class="page">{$page}</div>
+    <!-- 列表显示区域结束 --> 
+  </div>
+  <!-- 主体内容结束 --> 
+</div>
+<!-- 主页面结束 -->
+</div>
